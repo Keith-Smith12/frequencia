@@ -51,7 +51,12 @@
 
   <body>
 
-
+  @if(session('error'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ session('error') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
     <!-- Content -->
 
     <div class="container-xxl">
@@ -125,21 +130,22 @@
               <h4 class="mb-2">Adventure starts here 🚀</h4>
               <p class="mb-4">Make your app management easy and fun!</p>
 
-              <form id="formAuthentication" class="mb-3" action="index.html" method="POST">
+              <form class="mb-3" action="{{route('user.store')}}" method="POST">
+                @csrf
                 <div class="mb-3">
                   <label for="username" class="form-label">Username</label>
                   <input
                     type="text"
                     class="form-control"
                     id="username"
-                    name="username"
+                    name="{{'name'}}"
                     placeholder="Enter your username"
                     autofocus
                   />
                 </div>
                 <div class="mb-3">
                   <label for="email" class="form-label">Email</label>
-                  <input type="text" class="form-control" id="email" name="email" placeholder="Enter your email" />
+                  <input type="text" class="form-control" id="email" name="{{'email'}}" placeholder="Enter your email" />
                 </div>
                 <div class="mb-3 form-password-toggle">
                   <label class="form-label" for="password">Password</label>
@@ -148,7 +154,7 @@
                       type="password"
                       id="password"
                       class="form-control"
-                      name="password"
+                      name="{{'password'}}"
                       placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                       aria-describedby="password"
                     />
@@ -165,12 +171,12 @@
                     </label>
                   </div>
                 </div>
-                <button class="btn btn-primary d-grid w-100">Sign up</button>
+                <button type="submit" class="btn btn-primary d-grid w-100">Sign up</button>
               </form>
 
               <p class="text-center">
                 <span>Already have an account?</span>
-                <a href="auth-login-basic.html">
+                <a href="{{route('login')}}">
                   <span>Sign in instead</span>
                 </a>
               </p>
@@ -182,15 +188,6 @@
     </div>
 
     <!-- / Content -->
-
-    <div class="buy-now">
-      <a
-        href="https://themeselection.com/products/sneat-bootstrap-html-admin-template/"
-        target="_blank"
-        class="btn btn-danger btn-buy-now"
-        >Upgrade to Pro</a
-      >
-    </div>
 
     <script src="{{asset('assets_fo/vendor/libs/jquery/jquery.js')}}"></script>
     <script src="{{asset('assets_fo/vendor/libs/popper/popper.js')}}"></script>
