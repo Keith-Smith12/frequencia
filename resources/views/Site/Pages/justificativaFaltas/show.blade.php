@@ -13,31 +13,31 @@
     </div>
 @endif
         <div class="card d-flex">
-                <h5 class="card-header">Usuários Listados</h5>
+                <h5 class="card-header">Justificativas de Faltas Listadas</h5>
                 <div class="table-responsive text-nowrap">
                   <table class="table">
                     <thead class="table-dark">
                       <tr>
                         <th>#</th>
-                        <th>Nome</th>
-                        <th>email</th>
+                        <th>Frequência</th>
+                        <th>Descrição</th>
                         <th>Actions</th>
                       </tr>
                     </thead> 
-                    @foreach($users as $user)  
+                    @foreach($justificativaFaltas as $justificativaFalta)  
                     <tbody class="table-border-bottom-0">
                    
                     <tr>
-                        <td>{{$user->id}}</td>
-                        <td>{{$user->name}}</td>
-                        <td>{{$user->email}}</td>
+                        <td>{{$justificativaFalta->id}}</td>
+                        <td>{{$justificativaFalta->it_id_frequencia}}</td>
+                        <td>{{$justificativaFalta->vc_descricao}}</td>
                         <td>
-                          <a href="{{route('user.edit',$user->id)}}"> <i class="bx bx-edit-alt me-1"></i> Edit</a>
+                          <a href="{{route('justificativaFaltas.edit',$justificativaFalta->id)}}" class="btn btn-primary "> <i class="bx bx-edit-alt me-1"></i> Edit</a>
 
-                              <form action="{{route('user.delete',$user->id)}}"  method="POST">
+                              <form class="btn btn-danger btn-sm" action="{{route('justificativaFaltas.delete',$justificativaFalta->id)}}"  method="POST">
                                 @method('DELETE')
                                 @csrf
-                                <button class="dropdown-item" type="submit">
+                                <button class="btn btn-danger btn-sm btn-sm" type="submit">
                                   <i class="bx bx-trash me-1"></i> Delete
                                 </button>
                               </form>
