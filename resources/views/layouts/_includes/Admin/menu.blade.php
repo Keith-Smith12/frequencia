@@ -24,9 +24,7 @@
                     <ul class="nav side-menu">
                         <li><a href="#"><i class="fa fa-home"></i> Dashboard</a></li>
                         <li><a href="{{ route('exemplo.index') }}"><i class="fa fa-heart"></i> exemplo</a></li>
-                        <li><a href="{{ route('tarefa.create') }}">Criar tarefa</a></li>
-                        <li><a href="{{ route('tarefa.index') }}">listar tarefas</a></li>
-                        <li><a href="{{route('tarefa.purge-view')}}">Tarefas eliminadas</a></li>
+                        <li><a href="{{ route('tarefa.index') }}">Tarefas</a></li>
                         <li><a href="{{ route('projecto.create') }}">Criar projecto</a></li>
                         <li><a href="{{ route('projecto.index') }}">listar projectos</a></li>
                         <li><a href="{{route('projecto.purge-view')}}">projectos eliminadas</a></li>

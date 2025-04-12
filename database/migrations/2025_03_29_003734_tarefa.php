@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('vc_descricao')->nullable();
             $table->date('dt_data_entrega');
             $table->string('vc_portador');
-            $table->string ('ativo');
+            $table->string('ativo');
             $table->timestamps();
         });
     }

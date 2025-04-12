@@ -18,11 +18,12 @@ class tarefaController extends Controller
 
     public function create()
     {
-        return view('tarefas.create');
+        //Foi utilizada a modal do exemplo como formulário de criação de tarefas
     }
 
     public function store(Request $request)
     {
+        // dd($request);
         try {
             $validator = $request->validate(
                 [
@@ -30,14 +31,14 @@ class tarefaController extends Controller
                     "vc_descricao" => "nullable|string|max:500",
                     "dt_data_entrega" => "required|date",
                     "vc_portador" => "required|string|max:50",
-                    "ativo" => "in:true, false|required"
+                    "ativo" => "string"
                 ]
             );
             Tarefa::create($validator);
             return redirect()->route('tarefa.index')->with('sucess', 'Tarefa criada com sucesso!');
         } catch (\Illuminate\Validation\ValidationException $e) {
             // Retornar erros de validação
-            return back()->withErrors($e->errors())->withInput();
+            echo $e . "\n\n";
         } catch (\Exception $e) {
             // Retornar erro genérico
             return back()->with('error', 'Erro ao atualizar a tarefa: ' . $e->getMessage());
@@ -51,8 +52,7 @@ class tarefaController extends Controller
 
     public function edit($id)
     {
-        $tarefa = Tarefa::findOrFail($id);
-        return view('tarefas.edit', compact('tarefa'));
+        //Foi utilizada a modal do exemplo como formulário de edição de tarefas
     }
 
     public function update(Request $request, $id)
@@ -83,7 +83,7 @@ class tarefaController extends Controller
     public function destroy($id)
     {
         $tarefa = Tarefa::findOrFail($id);
-        $tarefa->ativo = "false";
+        $tarefa->ativo = "off";
         $tarefa->save();
 
         return redirect()->route('tarefa.purge-view')->with('sucess', 'Tarefa deletada com sucesso');
