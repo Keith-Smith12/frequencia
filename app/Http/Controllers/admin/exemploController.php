@@ -10,13 +10,13 @@ use Illuminate\Support\Facades\Validator;
 
 class exemploController extends Controller
 {
-     /**
+    /**
      * Listar exemplos (Livewire cuidará da exibição).
      */
     public function index()
     {
         $exemplos = Exemplo::all();
-        
+
         return view('admin.exemplo.index', compact('exemplos'));
     }
 
@@ -40,7 +40,7 @@ class exemploController extends Controller
             'observacao' => 'nullable|max:500',
             'ativo' => 'boolean'
         ]);
-       // dd($validator);
+        // dd($validator);
 
 
         try {
@@ -49,7 +49,7 @@ class exemploController extends Controller
             return redirect()->route('admin.exemplo.index')
                 ->with('success', 'Exemplo criado com sucesso!');
         } catch (Exception $e) {
-          //  dd($e);
+            //  dd($e);
             return back()->with('error', 'Erro ao criar exemplo: ' . $e->getMessage());
         }
     }

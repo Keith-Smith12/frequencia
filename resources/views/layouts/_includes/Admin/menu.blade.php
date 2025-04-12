@@ -23,7 +23,13 @@
                     <h3>Geral</h3>
                     <ul class="nav side-menu">
                         <li><a href="#"><i class="fa fa-home"></i> Dashboard</a></li>
-                        <li><a href="{{ route('exemplo.index')}}"><i class="fa fa-heart"></i> exemplo</a></li>
+                        <li><a href="{{ route('exemplo.index') }}"><i class="fa fa-heart"></i> exemplo</a></li>
+                        <li><a href="{{ route('tarefa.create') }}">Criar tarefa</a></li>
+                        <li><a href="{{ route('tarefa.index') }}">listar tarefas</a></li>
+                        <li><a href="{{route('tarefa.purge-view')}}">Tarefas eliminadas</a></li>
+                        <li><a href="{{ route('projecto.create') }}">Criar projecto</a></li>
+                        <li><a href="{{ route('projecto.index') }}">listar projectos</a></li>
+                        <li><a href="{{route('projecto.purge-view')}}">projectos eliminadas</a></li>
                         <li><a href="#"><i class="fa fa-heart"></i> Doações</a></li>
                         <li><a href="#"><i class="fa fa-users"></i> Beneficiários</a></li>
                         <li><a href="#"><i class="fa fa-handshake-o"></i> Doadores</a></li>
@@ -52,7 +58,7 @@
                     <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
                 </a>
                 <a data-toggle="tooltip" data-placement="top" title="Sair" href=""
-                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
                 </a>
                 <form id="logout-form" action="" method="POST" class="d-none">
@@ -75,7 +81,8 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li class="">
-                    <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
+                        aria-expanded="false">
                         <img src="" alt="">
                         <span class="fa fa-angle-down"></span>
                     </a>
@@ -89,7 +96,8 @@
                         </li>
                         <li><a href="javascript:;">Ajuda</a></li>
                         <li>
-                            <a href="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <a href=""
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <i class="fa fa-sign-out pull-right"></i> Sair
                             </a>
                         </li>
@@ -97,7 +105,8 @@
                 </li>
 
                 <li role="presentation" class="dropdown">
-                    <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                    <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown"
+                        aria-expanded="false">
                         <i class="fa fa-envelope-o"></i>
                         <span class="badge bg-green">6</span>
                     </a>
