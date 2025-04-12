@@ -1,41 +1,67 @@
+@extends('layouts._includes.Admin.modelo_index')
+@section('title', 'Projecto')
+@section('conteudo')
 
-<h1>Projectos deletados</h1>
-<nav>
-    <button>
-        <a href="{{ route('exemplo.index') }}">voltar</a>
-    </button>
-</nav>
+    <div class="right_col" role="main">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Lista de Projectos Eliminados</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <button class="btn btn-primary pull-right">
+                            <a href="{{ route('projecto.index') }}" style="color:white;">voltar</a>
+                        </button>
+                        <table id="datatable-responsive" class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Nome</th>
+                                    <th>Data De Início</th>
+                                    <th>Data De Conclusão</th>
+                                    <th>Estado</th>
+                                    <th>Prioridade</th>
+                                    <th>Id De Usuário</th>
+                                    <th>Ativo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse ($projectos as $projecto)
+                                    @if ($projecto->ativo == 'off')
+                                        <tr>
+                                            <td>{{ $projecto->id }}</td>
+                                            <td>{{ $projecto->vc_nome }}</td>
+                                            <td>{{ $projecto->dt_data_inicio }}</td>
+                                            <td>{{ $projecto->dt_data_conclusao }}</td>
+                                            <td>{{ $projecto->it_estado }}</td>
+                                            <td>{{ $projecto->vc_prioridade }}</td>
+                                            <td>{{ $projecto->it_id_usuario }}</td>
+                                            <td>{{ $projecto->ativo }}</td>
+                                            <td>
+                                                <button class="btn btn-warning btn-sm">
+                                                    <a href="{{ route('projecto.restaurar', $projecto->id) }}"
+                                                        style="color:white;">Restaurar</a>
+                                                </button>
+                                                <form action="{{ route('projecto.purge', $projecto->id) }}" method="GET"
+                                                    style="display:inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm"
+                                                        onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endif
+                                @empty
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-@forelse ($projectos as $projecto)
-    @if ($projecto->ativo == 'false')
-        <h3 style="margin: 20px;">
-            <button style="display: block; text-align:left; padding: 20px;">
-
-                <h1><strong> {{ $projecto->id }} º TABELA</strong></h1><br>
-                <p><strong>ID:</strong>{{ $projecto->id }}<br><br></p>
-                <p><strong>PROJECTO:</strong>{{ $projecto->vc_nome }}<br><br></p>
-                <p><strong>DATA DE INÍCIO:</strong>{{ $projecto->dt_data_inicio }}<br><br></p>
-                <p><strong>DATA DE CONCLUSÃO:</strong>{{ $projecto->dt_data_conclusao }}<br><br></p>
-                <p><strong>ESTADO: </strong>
-                    @if ($projecto->estado == 0)
-                        pendente
-                    @else
-                        concluído
-                    @endif
-                </p>
-                <p><strong>PRIORIDADE: </strong>{{ $projecto->vc_prioridade }}<br><br></p>
-                <p><strong>ID DO USUÁRIO: </strong>{{ $projecto->it_id_usuario }}<br><br></p>
-
-                <a href="{{ route('projecto.restaurar', ['id' => $projecto->id]) }}">RESTAURAR</a>
-
-                <form action="{{ route('projecto.destroy', $projecto->id) }}" method="post">
-                    @csrf
-                    @method('post')
-                    <button type="submit">DELETAR</button>
-                </form>
-            </button>
-        </h3>
-    @endif
-@empty
-    <h1 style="opacity:.5; display:grid; place-items:center;">NENHUM PROJECTO</h1>
-@endforelse
+@endsection

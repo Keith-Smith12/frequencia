@@ -36,22 +36,18 @@ Route::prefix('tarefa')->group(function () {
 Route::prefix('projecto')->group(function () {
     #Rota de listagem de projectos
     Route::get('/', [projectoController::class, 'index'])->name('projecto.index');
-    #Rota que redireciona para a view de criação de novos projectos
-    Route::get('/create', [projectoController::class, 'create'])->name('projecto.create');
     #Rota de criação de novos projectos (validação e armazenamento dos dados)
     Route::post('/store', [projectoController::class, 'store'])->name('projecto.store');
-    #Rota que redireciona para a view de edição dos dados do projecto
-    Route::get('/edit/{id}', [projectoController::class, 'edit'])->name('projecto.edit');
     #Rota de validação dos daods editados
-    Route::get('/update/{id}', [projectoController::class, 'update'])->name('projecto.update');
+    Route::put('/update/{id}', [projectoController::class, 'update'])->name('projecto.update');
     #Rota que elimina projectos (envia para a lixeira)
     Route::post('/delete/{id}', [projectoController::class, 'destroy'])->name('projecto.destroy');
     #Rota que permite acessar a lixeira
     Route::get('/purge', [projectoController::class, 'redirectToPurgeView'])->name('projecto.purge-view');
     #Rota que deleta o projecto permanentemente
-    Route::delete('/purge/{id}', [projectoController::class, 'purge'])->name('projecto.purge');
+    Route::get('/purge/{id}', [projectoController::class, 'purge'])->name('projecto.purge');
     #rota que permite restaurar os projectos
-    Route::post('/restaurar/{id}', [projectoController::class, 'restaurar'])->name('projecto.restaurar');
+    Route::get('/restaurar/{id}', [projectoController::class, 'restaurar'])->name('projecto.restaurar');
 });
 
 Route::middleware([

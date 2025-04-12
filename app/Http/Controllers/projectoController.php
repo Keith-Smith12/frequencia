@@ -22,7 +22,7 @@ class projectoController extends Controller
      */
     public function create()
     {
-        return view('projectos.create');
+        //
     }
 
     /**
@@ -38,7 +38,7 @@ class projectoController extends Controller
             "it_estado" => "required",
             "vc_prioridade" => "nullable|string",/*pode dar-se o caso de todas as fases do projecto terem o mesmo nível de relevância*/
             "it_id_usuario" => "required",
-            "ativo" => "in:true,false|required",
+            "ativo" => "string",
         ]);
 
         Projecto::create($projecto);
@@ -74,17 +74,19 @@ class projectoController extends Controller
             "it_estado" => "required",
             "vc_prioridade" => "nullable|string",
             "it_id_usuario" => "required",
-            "ativo" => "in:true,false|required",
+            "ativo" => "string",
         ]);
         $projecto = Projecto::findOrFail($id);
-        $projecto-> update($validator);
+        $projecto->update($validator);
         return redirect()->route('projecto.index')->with('sucess', 'projecto atualizado com sucesso!');
     }
 
-    public function destroy($id){
+    public function destroy($id)
+    {
         $projecto = Projecto::findOrFail($id);
-        $projecto->ativo = "false";
-        return redirect()->route('projecto.purge-view')->wiht('sucess', 'Tarefa deletada com sucesso');
+        $projecto->ativo = 'off';
+        $projecto->save();
+        return redirect()->route('projecto.purge-view')->with('sucess', 'Tarefa deletada com sucesso');
     }
 
     public function redirectToPurgeView()
@@ -107,10 +109,9 @@ class projectoController extends Controller
     public function restaurar($id)
     {
         $projecto = Projecto::findOrFail($id);
-        $projecto->ativo = "true";
+        $projecto->ativo = "on";
         $projecto->save();
 
         return redirect()->route('projecto.index')->with('sucess', 'projecto deletada com sucesso');
     }
-
 }

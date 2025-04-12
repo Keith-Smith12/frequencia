@@ -1,5 +1,5 @@
 @extends('layouts._includes.Admin.modelo_index')
-@section('title', 'Tarefa')
+@section('title', 'Tarefas')
 @section('conteudo')
 
     <div class="right_col" role="main">
@@ -11,7 +11,7 @@
                         <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#modalAdicionar">
                             + Adicionar
                         </button>
-                        <button class="btn btn-secondary pull-right">
+                        <button class="btn pull-right">
                             <a href="{{ route('tarefa.purge-view') }}">Purge View</a>
                         </button>
                         <div class="clearfix"></div>
