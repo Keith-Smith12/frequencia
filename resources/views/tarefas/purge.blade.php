@@ -8,12 +8,12 @@
                 <div class="x_panel">
                     <div class="x_title">
                         <h2>Lista de Tarefas Eliminadas</h2>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="x_content">
                         <button class="btn btn-primary pull-right">
                             <a href="{{ route('tarefa.index') }}" style="color:white;">voltar</a>
                         </button>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
                         <table id="datatable-responsive" class="table table-striped table-bordered">
                             <thead>
                                 <tr>

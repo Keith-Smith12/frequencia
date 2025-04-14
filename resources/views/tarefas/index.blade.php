@@ -14,6 +14,9 @@
                         <button class="btn pull-right">
                             <a href="{{ route('tarefa.purge-view') }}">Purge View</a>
                         </button>
+                        <button class="btn btn-primary pull-right">
+                            <a href="{{ route('exemplo.index') }}" style="color:white;">voltar</a>
+                        </button>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">

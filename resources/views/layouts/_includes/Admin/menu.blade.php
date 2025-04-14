@@ -25,9 +25,7 @@
                         <li><a href="#"><i class="fa fa-home"></i> Dashboard</a></li>
                         <li><a href="{{ route('exemplo.index') }}"><i class="fa fa-heart"></i> exemplo</a></li>
                         <li><a href="{{ route('tarefa.index') }}">Tarefas</a></li>
-                        <li><a href="{{ route('projecto.create') }}">Criar projecto</a></li>
-                        <li><a href="{{ route('projecto.index') }}">listar projectos</a></li>
-                        <li><a href="{{route('projecto.purge-view')}}">projectos eliminadas</a></li>
+                        <li><a href="{{ route('projecto.index') }}">Projectos</a></li>
                         <li><a href="#"><i class="fa fa-heart"></i> Doações</a></li>
                         <li><a href="#"><i class="fa fa-users"></i> Beneficiários</a></li>
                         <li><a href="#"><i class="fa fa-handshake-o"></i> Doadores</a></li>

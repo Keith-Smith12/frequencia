@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\exemploController;
+use App\Http\Controllers\frequenciaController;
 use App\Http\Controllers\tarefaController;
 use App\Http\Controllers\projectoController;
 use Illuminate\Support\Facades\Route;
@@ -50,6 +51,9 @@ Route::prefix('projecto')->group(function () {
     Route::get('/restaurar/{id}', [projectoController::class, 'restaurar'])->name('projecto.restaurar');
 });
 
+Route::prefix('frequencia')->group(function(){
+    Route::get('/', [frequenciaController::class, 'index'])->name('frequencia.index');
+});
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
