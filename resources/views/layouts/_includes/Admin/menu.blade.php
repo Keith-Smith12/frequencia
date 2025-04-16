@@ -22,7 +22,7 @@
                 <div class="menu_section">
                     <h3>Geral</h3>
                     <ul class="nav side-menu">
-                        <li><a href="#"><i class="fa fa-home"></i> Dashboard</a></li>
+                        <li><a href="{{ route('dash')}}"><i class="fa fa-home"></i> Dashboard</a></li>
                   <!--      <li><a href="{{ route('exemplo.index')}}"><i class="fa fa-heart"></i> exemplo</a></li> -->  
                         <li><a href="{{ route('usuario.index') }}"><i class="fa fa-user"></i> Usuário</a></li>
                         <li><a href="{{ route('frequencia.index') }}"><i class="fa fa-calendar-check"></i> Frequência</a></li>
@@ -31,7 +31,7 @@
                         <li><a href="{{ route('projecto.index') }}"><i class="fa fa-sitemap"></i> Projeto</a></li>                        
                         <li><a href="{{ route('justificativa_falta.index') }}"><i class="fa fa-calendar-times"></i> Justificativa de Faltas</a></li>
                         <li><a href="{{ route('atraso.index') }}"><i class="fa fa-hourglass-half"></i> Atrasos</a></li>
-                        <li><a href="#"><i class="fa fa-clock"></i> Justificativa de Atrasos</a></li>
+                        <li><a href="{{ route('justificativaAtraso.index') }}"><i class="fa fa-clock"></i> Justificativa de Atrasos</a></li>
                         <li><a href="#"><i class="fa fa-tags"></i> Categoria de Tarefas</a></li>
 
 
@@ -76,9 +76,6 @@
 <div class="top_nav">
     <div class="nav_menu">
         <nav>
-            <div class="nav toggle">
-                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-            </div>
 
             <ul class="nav navbar-nav navbar-right">
                 <li class="">

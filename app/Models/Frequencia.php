@@ -13,4 +13,9 @@ class Frequencia extends Model
         'it_id_usuario',
         'vc_tipo',
     ];
+
+    public function usuario()
+    {
+        return $this->belongsTo(Usuario::class, 'it_id_usuario');
+    }
 }

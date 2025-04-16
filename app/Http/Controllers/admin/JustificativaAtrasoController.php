@@ -3,29 +3,32 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\JustificativaAtraso;
-use App\Models\TarefaUsuario;
+use App\Models\JustificativaAtraso;  // Alterado para JustificativaAtraso
+use App\Models\TarefaUsuario; 
 use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Support\Facades\Validator;
 
-class JustificativaAtrasoController extends Controller
+class   JustificativaAtrasoController extends Controller
 {
     /**
-     * Listar atrasos.
+     * Listar justificativas de atraso.
      */
     public function index()
     {
-        $data['justificativaAtrasos'] = JustificativaAtraso::join('tarefa_usuarios', 'justificativa_atrasos.it_id_atraso', '=', 'atrasos.id')
+        $data['justificativasAtraso'] = JustificativaAtraso::join('atrasos', 'justificativa_atrasos.it_id_atraso', '=', 'atrasos.id')
+            ->join('tarefa_usuarios', 'atrasos.it_id_tarefa_usuario', '=', 'tarefa_usuarios.id')
+            ->join('usuarios', 'tarefa_usuarios.it_id_usuario', '=', 'usuarios.id')
+            ->join('tarefas', 'tarefa_usuarios.it_id_tarefa', '=', 'tarefas.id')
             ->select(
                 'justificativa_atrasos.*',
-                'atrasos.qtd_dias as dias',       
+                'usuarios.vc_nome as usuario',     
+                'tarefas.vc_nome as tarefa'     
             )
             ->get();
 
-            $tarefasUsuarios = TarefaUsuario::all(); 
-            return view('admin.justificativaAtraso.index', $data, compact('tarefasUsuarios'));
-            
+        $tarefasUsuarios = TarefaUsuario::all(); 
+        return view('admin.justificativaAtraso.index', $data, compact('tarefasUsuarios'));
     }
 
     /**
@@ -37,35 +40,33 @@ class JustificativaAtrasoController extends Controller
         return view('admin.justificativaAtraso.create', compact('tarefasUsuarios'));
     }
 
-
-
     /**
-     * Criar um novo atraso.
+     * Criar uma nova justificativa de atraso.
      */
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'it_id_tarefa_usuario' => 'required|integer|exists:tarefa_usuarios,id', 
-            'qtd_dias' => 'required|integer|min:1', 
+            'it_id_atraso' => 'required|integer|exists:atrasos,id',  
+            'vc_descricao' => 'required|string|min:5', 
         ]);        
 
         try {
             JustificativaAtraso::create($request->all());
 
             return redirect()->route('justificativaAtraso.index')
-                ->with('success', 'justificativaAtraso registrado com sucesso!');
+                ->with('success', 'Justificativa de atraso registrada com sucesso!');
         } catch (Exception $e) {
-            return back()->with('error', 'Erro ao registrar atraso: ' . $e->getMessage());
+            return back()->with('error', 'Erro ao registrar justificativa de atraso: ' . $e->getMessage());
         }
     }
 
     /**
-     * Exibir um atraso específico.
+     * Exibir uma justificativa de atraso específica.
      */
     public function show($id)
     {
         $justificativaAtraso = JustificativaAtraso::findOrFail($id);
-        return view('admin.justificativaAtraso.index', compact('atraso'));
+        return view('admin.justificativaAtraso.show', compact('justificativaAtraso'));
     }
 
     /**
@@ -74,17 +75,17 @@ class JustificativaAtrasoController extends Controller
     public function edit($id)
     {
         $justificativaAtraso = JustificativaAtraso::findOrFail($id);
-        return view('admin.justificativaAtraso.index', compact('atraso'));
+        return view('admin.justificativaAtraso.edit', compact('justificativaAtraso'));
     }
 
     /**
-     * Atualizar um atraso.
+     * Atualizar uma justificativa de atraso.
      */
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'it_id_tarefa_usuario' => 'required|integer|exists:tarefa_usuarios,id', 
-            'qtd_dias' => 'required|integer|min:1', 
+            'it_id_atraso' => 'required|integer|exists:atrasos,id',  // Alterado para relacionar com Atraso
+            'vc_descricao' => 'required|string|min:5', 
         ]);
 
         try {
@@ -92,14 +93,14 @@ class JustificativaAtrasoController extends Controller
             $justificativaAtraso->update($request->all());
 
             return redirect()->route('justificativaAtraso.index')
-                ->with('success', 'Atraso atualizado com sucesso!');
+                ->with('success', 'Justificativa de atraso atualizada com sucesso!');
         } catch (Exception $e) {
-            return back()->with('error', 'Erro ao atualizar justificativaAtraso: ' . $e->getMessage());
+            return back()->with('error', 'Erro ao atualizar justificativa de atraso: ' . $e->getMessage());
         }
     }
 
     /**
-     * Deletar um atraso.
+     * Deletar uma justificativa de atraso.
      */
     public function destroy($id)
     {
@@ -107,6 +108,6 @@ class JustificativaAtrasoController extends Controller
         $justificativaAtraso->delete();
 
         return redirect()->route('justificativaAtraso.index')
-            ->with('success', 'justificativaAtraso deletado com sucesso!');
+            ->with('success', 'Justificativa de atraso deletada com sucesso!');
     }
 }

@@ -41,11 +41,11 @@
     <label for="vc_tipo">Tipo de Frequência</label>
     <select class="form-control" id="vc_tipo" name="vc_tipo" required>
         <option value="">Selecione o tipo</option>
-        <option value="Presente" {{ old('vc_tipo', $frequencia->vc_tipo ?? '') == 'Presente' ? 'selected' : '' }}>Presente</option>
-        <option value="Falta" {{ old('vc_tipo', $frequencia->vc_tipo ?? '') == 'Falta' ? 'selected' : '' }}>Falta</option>
-        <option value="Justificada" {{ old('vc_tipo', $frequencia->vc_tipo ?? '') == 'Justificada' ? 'selected' : '' }}>Falta Justificada</option>
-        <option value="Atraso" {{ old('vc_tipo', $frequencia->vc_tipo ?? '') == 'Atraso' ? 'selected' : '' }}>Atraso</option>
-        <option value="Dispensado" {{ old('vc_tipo', $frequencia->vc_tipo ?? '') == 'Dispensado' ? 'selected' : '' }}>Dispensado</option>
+        <option value="presente" {{ old('vc_tipo', $frequencia->vc_tipo ?? '') == 'Presente' ? 'selected' : '' }}>Presente</option>
+        <option value="falta" {{ old('vc_tipo', $frequencia->vc_tipo ?? '') == 'Falta' ? 'selected' : '' }}>Falta</option>
+        <option value="justificada" {{ old('vc_tipo', $frequencia->vc_tipo ?? '') == 'Justificada' ? 'selected' : '' }}>Falta Justificada</option>
+        <option value="atraso" {{ old('vc_tipo', $frequencia->vc_tipo ?? '') == 'Atraso' ? 'selected' : '' }}>Atraso</option>
+        <option value="dispensado" {{ old('vc_tipo', $frequencia->vc_tipo ?? '') == 'Dispensado' ? 'selected' : '' }}>Dispensado</option>
     </select>
 </div>
 

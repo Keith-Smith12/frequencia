@@ -1,18 +1,19 @@
 <?php
 
+use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\AtrasoController;
 use App\Http\Controllers\admin\exemploController;
 use App\Http\Controllers\admin\FrequenciaController;
+use App\Http\Controllers\admin\JustificativaAtrasoController;
 use App\Http\Controllers\admin\JustificativaFaltaController;
 use App\Http\Controllers\admin\ProjectoController;
 use App\Http\Controllers\admin\TarefaController;
 use App\Http\Controllers\admin\TarefaUsuarioController;
 use App\Http\Controllers\admin\UsuarioController;
+use App\Models\JustificativaAtraso;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('admin.index');
-});
+
 
 Route::prefix('exemplo')->group(function () {
     Route::get('/', [exemploController::class, 'index'])->name('exemplo.index');
@@ -62,6 +63,8 @@ Route::prefix('projecto')->group(function () {
     Route::delete('/{id}', [ProjectoController::class, 'destroy'])->name('projecto.destroy');
 });
 
+Route::get('/', [AdminController::class, 'dashboard'])->name('dash');
+
 Route::prefix('justificativa-falta')->group(function () {
     // Rota para listar todas as justificativas de falta
     Route::get('/', [JustificativaFaltaController::class, 'index'])->name('justificativa_falta.index');
@@ -97,7 +100,24 @@ Route::prefix('atraso')->group(function () {
     Route::delete('/{id}', [AtrasoController::class, 'destroy'])->name('atraso.destroy');
 });
 
+Route::prefix('justificativaAtraso')->group(function () {
+    // Listar todas as justificativas de atraso
+    Route::get('/', [JustificativaAtrasoController::class, 'index'])->name('justificativaAtraso.index');
 
+    // Armazenar nova justificativa de atraso
+    Route::post('/', [JustificativaAtrasoController::class, 'store'])->name('justificativaAtraso.store');
+
+    // Exibir uma justificativa de atraso específica
+    Route::get('/{id}', [JustificativaAtrasoController::class, 'show'])->name('justificativaAtraso.show');
+
+    // Atualizar justificativa de atraso existente
+    Route::put('/{id}', [JustificativaAtrasoController::class, 'update'])->name('justificativaAtraso.update');
+
+    // Excluir justificativa de atraso
+    Route::delete('/{id}', [JustificativaAtrasoController::class, 'destroy'])->name('justificativaAtraso.destroy');
+});
+
+/*
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -107,3 +127,7 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+*/
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
