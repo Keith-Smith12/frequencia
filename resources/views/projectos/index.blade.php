@@ -1,4 +1,4 @@
-@extends('layouts._includes.Admin.modelo_index')
+@extends('layouts._includes.Admin.body')
 @section('title', 'Projectos')
 @section('conteudo')
 
@@ -13,9 +13,6 @@
                         </button>
                         <button class="btn pull-right">
                             <a href="{{ route('projecto.purge-view') }}">Purge View</a>
-                        </button>
-                        <button class="btn btn-primary pull-right">
-                            <a href="{{ route('exemplo.index') }}" style="color:white;">voltar</a>
                         </button>
                         <div class="clearfix"></div>
                     </div>

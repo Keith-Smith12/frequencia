@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\exemploController;
-use App\Http\Controllers\frequenciaController;
+use App\Http\Controllers\categoriaTarefaController;
 use App\Http\Controllers\tarefaController;
 use App\Http\Controllers\projectoController;
 use Illuminate\Support\Facades\Route;
@@ -51,9 +51,18 @@ Route::prefix('projecto')->group(function () {
     Route::get('/restaurar/{id}', [projectoController::class, 'restaurar'])->name('projecto.restaurar');
 });
 
-Route::prefix('frequencia')->group(function(){
-    Route::get('/', [frequenciaController::class, 'index'])->name('frequencia.index');
+Route::prefix('categoriaTarefa')->group(function () {
+    #Rota de listagem de categoriaTarefa
+    Route::get('/', [categoriaTarefaController::class, 'index'])->name('categoriaTarefa.index');
+    #Rota de criação de novos categoriaTarefa (validação e armazenamento dos dados)
+    Route::post('/store', [categoriaTarefaController::class, 'store'])->name('categoriaTarefa.store');
+    #Rota de validação dos daods editados
+    Route::put('/update/{id}', [categoriaTarefaController::class, 'update'])->name('categoriaTarefa.update');
+    #Rota que elimina categoriaTarefa (envia para a lixeira)
+    Route::delete('/delete/{id}', [categoriaTarefaController::class, 'destroy'])->name('categoriaTarefa.destroy');
+
 });
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

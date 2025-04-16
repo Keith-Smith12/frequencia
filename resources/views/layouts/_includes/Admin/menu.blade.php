@@ -23,8 +23,9 @@
                     <h3>Geral</h3>
                     <ul class="nav side-menu">
                         <li><a href="#"><i class="fa fa-home"></i> Dashboard</a></li>
-                        <li><a href="{{ route('exemplo.index') }}"><i class="fa fa-heart"></i> exemplo</a></li>
+                        <li><a href="{{ route('exemplo.index') }}"><i class="fa fa-heart"></i>exemplo</a></li>
                         <li><a href="{{ route('tarefa.index') }}">Tarefas</a></li>
+                        <li><a href="{{ route('categoriaTarefa.index') }}">Categoria de Tarefas</a></li>
                         <li><a href="{{ route('projecto.index') }}">Projectos</a></li>
                         <li><a href="#"><i class="fa fa-heart"></i> Doações</a></li>
                         <li><a href="#"><i class="fa fa-users"></i> Beneficiários</a></li>

@@ -23,7 +23,6 @@ class tarefaController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request);
         try {
             $validator = $request->validate(
                 [
@@ -41,7 +40,7 @@ class tarefaController extends Controller
             echo $e . "\n\n";
         } catch (\Exception $e) {
             // Retornar erro genérico
-            return back()->with('error', 'Erro ao atualizar a tarefa: ' . $e->getMessage());
+            return back()->with('error', 'Erro ao criar a tarefa: ' . $e->getMessage());
         }
     }
 
@@ -106,7 +105,7 @@ class tarefaController extends Controller
     public function restaurar($id)
     {
         $tarefa = Tarefa::findOrFail($id);
-        $tarefa->ativo = "true";
+        $tarefa->ativo = "on";
         $tarefa->save();
 
         return redirect()->route('tarefa.index')->with('sucess', 'Tarefa deletada com sucesso');

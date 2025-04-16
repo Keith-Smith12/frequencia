@@ -1,4 +1,4 @@
-@extends('layouts._includes.Admin.modelo_index')
+@extends('layouts._includes.Admin.body')
 @section('title', 'Projecto')
 @section('conteudo')
 
@@ -11,9 +11,6 @@
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
-                        <button class="btn btn-primary pull-right">
-                            <a href="{{ route('projecto.index') }}" style="color:white;">voltar</a>
-                        </button>
                         <table id="datatable-responsive" class="table table-striped table-bordered">
                             <thead>
                                 <tr>

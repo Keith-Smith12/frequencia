@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('frequencia', function (Blueprint $table) {
+        Schema::create('categoria_Tarefas', function(Blueprint $table){
             $table->id();
-            $table->date('dt_data');
-            $table->time('tm_hora_entrada');
-            $table->time('tm_hora_saida');
-            $table->integer('id_usuario');
+            $table->string('vc_nome');
+            $table->string('dt_descricao')->nullable();
+            $table->string('vc_prioridade');
+            $table->integer('it_tempo_estimado');
             $table->string('vc_tipo');
             $table->timestamps();
         });

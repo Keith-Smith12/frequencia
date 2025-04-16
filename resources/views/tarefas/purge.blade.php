@@ -1,4 +1,4 @@
-@extends('layouts._includes.Admin.modelo_index')
+@extends('layouts._includes.Admin.body')
 @section('title', 'Tarefa')
 @section('conteudo')
 
@@ -8,9 +8,6 @@
                 <div class="x_panel">
                     <div class="x_title">
                         <h2>Lista de Tarefas Eliminadas</h2>
-                        <button class="btn btn-primary pull-right">
-                            <a href="{{ route('tarefa.index') }}" style="color:white;">voltar</a>
-                        </button>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
