@@ -1,16 +1,14 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
-{
+class UserController extends Controller {
+
     public function index(){
         $users=User::all();
-        return view ('Site/Pages/User/show',compact('users'));
+        return view ('Site/layouts/dashboard',compact('users'));
     }
 public function create(){
     return view('Site/Pages/User/create');
@@ -24,8 +22,8 @@ public function create(){
             "password" => "required"
         ]);
         $user=User::create($request->all());
-        redirect()->route('index');
-
+        $request2= [$user->email,$user->password];
+        redirect()->route('auth.login',$request2);
         }catch(Exception $e){
             return redirect()->route('index')->with('error','Erro ao criar usuário', $e->getMessage());
         }

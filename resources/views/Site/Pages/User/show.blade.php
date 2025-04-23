@@ -1,6 +1,7 @@
 @extends('Site/layouts/page')
-@section('title') Todos os users @endsection
+@section('title') Listando... @endsection
 @section('conteudo')
+
 @if(session('error'))
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
         {{ session('error') }}

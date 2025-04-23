@@ -18,3 +18,8 @@ Route::prefix('user')->group(function () {
     Route::put('/update/{id}', ['as' => 'user.update', 'uses' => "App\Http\Controllers\UserController@update"]);
     Route::delete('/delete/{id}', ['as' => 'user.delete', 'uses' => "App\Http\Controllers\UserController@delete"]);
 });
+
+Route::prefix('auth')->group(function () {
+    Route::post('/login', ['as' => 'auth.login', 'uses' => "App\Http\Controllers\AuthController@login"]);
+    Route::post('/logout', ['as' => 'auth.logout', 'uses' => "App\Http\Controllers\AuthController@logout"]);    
+});

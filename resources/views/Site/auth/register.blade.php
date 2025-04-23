@@ -123,7 +123,7 @@
                       </g>
                     </svg>
                   </span>
-                  <span class="app-brand-text demo text-body fw-bolder">sneat</span>
+                  <span class="app-brand-text demo text-body fw-bolder">SGF</span>
                 </a>
               </div>
               <!-- /Logo -->
