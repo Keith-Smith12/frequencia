@@ -9,8 +9,6 @@
             @include('layouts._includes.Admin.menu')
             <!-- /menu -->
 
-
-
             @yield('conteudo')
 
             <!-- footer content -->

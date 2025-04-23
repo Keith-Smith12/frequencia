@@ -23,6 +23,12 @@
     <!-- bootstrap-daterangepicker -->
     <link href="{{asset('vendors/bootstrap-daterangepicker/daterangepicker.css')}}" rel="stylesheet">
 
+
+<!-- Para Font Awesome versão 5 -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+
+
+
     <!-- Custom Theme Style -->
     <link href="{{asset('build/css/custom.min.css')}}" rel="stylesheet">
 
