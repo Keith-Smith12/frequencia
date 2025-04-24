@@ -20,7 +20,7 @@
 <div class="form-group">
     <label for="it_estado">Estado do projecto</label>
 
-    <input type="number" class="form-control" id="it_estado" name="it_estado" step="0.01" required
+    <input type="number" class="form-control" id="it_estado" name="it_estado" step="1" required
     placeholder="Digite o Estado do Projecto"
     value="{{ old('it_estado', isset($projecto) ? $projecto->it_estado : '') }}">
 </div>
