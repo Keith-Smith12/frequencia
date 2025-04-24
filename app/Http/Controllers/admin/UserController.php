@@ -1,5 +1,8 @@
 <?php
-namespace App\Http\Controllers;
+
+namespace App\Http\Controllers\admin;
+
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -22,8 +25,7 @@ public function create(){
             "password" => "required"
         ]);
         $user=User::create($request->all());
-        $request2= [$user->email,$user->password];
-        redirect()->route('auth.login',$request2);
+        redirect()->route('/');
         }catch(Exception $e){
             return redirect()->route('index')->with('error','Erro ao criar usuário', $e->getMessage());
         }
