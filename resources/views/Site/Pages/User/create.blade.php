@@ -1,13 +1,6 @@
 @extends('Site/layouts/page')
 @section('title') Nicolaudio @endsection
 @section('conteudo')
-
-@if(session('error'))
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        {{ session('error') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-@endif
          <div class="row">
               <div class="col-xxl">
                   <div class="card mb-4">
@@ -16,6 +9,12 @@
                       <small class="text-muted float-end">Default label</small>
                     </div>
                     <div class="card-body">
+                    @if(session('error'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ session('error') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif    
                 <form action="{{route('user.store')}}" method="post">
                     @csrf
                     <div class="row mb-3">

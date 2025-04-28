@@ -32,5 +32,16 @@
     <script src="{{asset('assets/js/dashboard.js')}}"></script>
     <!-- <script src="assets/js/Chart.roundedBarCharts.js"></script> -->
     <!-- End custom js for this page-->
+    <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var collapseElement = document.getElementById('ui-basic00');
+    var bsCollapse = bootstrap.Collapse.getInstance(collapseElement);
+    if (bsCollapse) {
+      bsCollapse.hide();
+    }
+  });
+  localStorage.setItem('sidebar-state', 'expanded');
+</script>
+
   </body>
 </html>

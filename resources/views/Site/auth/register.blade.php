@@ -138,7 +138,7 @@
                     type="text"
                     class="form-control"
                     id="username"
-                    name="{{'name'}}"
+                    name="{{'vc_nome'}}"
                     placeholder="Enter your username"
                     autofocus
                   />

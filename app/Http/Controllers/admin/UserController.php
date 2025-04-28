@@ -10,24 +10,27 @@ use Illuminate\Http\Request;
 class UserController extends Controller {
 
     public function index(){
-        $users=User::all();
-        return view ('Site/layouts/dashboard',compact('users'));
+        return view ('Site/layouts/dashboard');
     }
+    public function all(){
+        $users=User::all();
+        return view ('Site/Pages/user/show',compact('users'));
+    }
+
 public function create(){
     return view('Site/Pages/User/create');
 }
     public function store(Request $request){
-
         try{
         $request->validate([
-            "name" =>  "required|string" ,
+            "vc_nome" =>  "required|string" ,
             "email"=> "required" ,
             "password" => "required"
         ]);
         $user=User::create($request->all());
-        redirect()->route('/');
+        return redirect('/');
         }catch(Exception $e){
-            return redirect()->route('index')->with('error','Erro ao criar usuário', $e->getMessage());
+            return redirect('/')->with('error','Erro ao criar usuário'. $e->getMessage());
         }
     }
 
@@ -40,7 +43,7 @@ public function create(){
             "password" => "required"
         ]);
         $user = $user->update($request->all());
-        redirect()->route('index');
+        return redirect('/user');
         }catch(Exception $e){
             return redirect()->back()->with('error', 'Erro ao criar usuário: ' . $e->getMessage());
         }

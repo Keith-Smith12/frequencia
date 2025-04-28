@@ -4,10 +4,11 @@
      
       </div>
       <!-- partial:partials/_navbar.html -->
+       
       <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
   <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
     <a class="navbar-brand brand-logo me-5" href="index.html"><img src="assets/images/logo.svg" class="me-2" alt="SGF" /></a>
-    <a class="navbar-brand brand-logo-mini" href="index.html"><img src="assets/images/logo-mini.svg" alt="SGF" /></a>
+    <a class="navbar-brand brand-logo-mini" href="index.html"><img src="{{'assets/images/logo-mini.svg'}}" alt="SGF" /></a>
   </div>
   <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
     <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -98,20 +99,50 @@
         <nav class="sidebar sidebar-offcanvas" id="sidebar">
   <ul class="nav">
     <li class="nav-item">
-      <a class="nav-link" href="index.html">
+      <a class="nav-link" href="{{route('user.index')}}">
         <i class="icon-grid menu-icon"></i>
         <span class="menu-title">Dashboard</span>
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-        <i class="icon-layout menu-icon"></i>
+    <a class="nav-link" data-bs-toggle="collapse" href="#atrasos" aria-expanded="false"
+        aria-controls="atrasos">
+        <i class="icon-columns menu-icon"></i>
+        <span class="menu-title">Atrasos</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse" id="atrasos">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"> <a class="nav-link" href="{{route('register')}}">criar</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{{route('register')}}">Listar</a></li>
+        </ul>
+      </div>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link" data-bs-toggle="collapse" href="#frequencia" aria-expanded="false"
+        aria-controls="frequencia">
+        <i class="icon-columns menu-icon"></i>
+        <span class="menu-title">Frequencia</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse" id="frequencia">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"> <a class="nav-link" href="{{route('register')}}">criar</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{{route('register')}}">Listar</a></li>
+        </ul>
+      </div>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false"
+        aria-controls="form-elements">
+        <i class="icon-columns menu-icon"></i>
         <span class="menu-title">Users</span>
         <i class="menu-arrow"></i>
       </a>
-      <div class="collapse" id="ui-basic">
-        <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="{{route('register')}}">criar</a></li>
+      <div class="collapse"  id="form-elements">
+        <ul class="nav flex-column sub-menu"  aria-expanded="false">
+          <li class="nav-item"><a class="nav-link" href="{{route('register')}}">Criar</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{route('user.all')}}">Todos</a></li>
         </ul>
       </div>
     </li>

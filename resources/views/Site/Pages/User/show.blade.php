@@ -2,6 +2,8 @@
 @section('title') Listando... @endsection
 @section('conteudo')
 
+
+
 @if(session('error'))
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
         {{ session('error') }}
@@ -42,9 +44,9 @@
                                 <button class="dropdown-item" type="submit">
                                   <i class="bx bx-trash me-1"></i> Delete
                                 </button>
+                              </form>
                         </td>
-                      </tr>
-                      
+                      </tr>   
                     </tbody>
                     @endforeach
                   </table>
