@@ -14,7 +14,7 @@ class TarefaController extends Controller
     {
         $tarefas = Tarefa::all();
         
-        return view('admin.tarefa.index', compact('tarefas'));
+        return view('Site.Pages.Tarefa.show', compact('tarefas'));
     }
 
     /**
@@ -22,7 +22,7 @@ class TarefaController extends Controller
      */
     public function create()
     {
-        return view('admin.tarefa.create');
+        return view('Site/Pages/Tarefa/create');
     }
 
     /**
@@ -54,7 +54,7 @@ class TarefaController extends Controller
     public function show($id)
     {
         $tarefa = Tarefa::findOrFail($id);
-        return view('admin.tarefa.index', compact('tarefa'));
+        return view('Site.Pages.Tarefa.edit', compact('tarefa'));
     }
 
     /**
@@ -63,7 +63,7 @@ class TarefaController extends Controller
     public function edit($id)
     {
         $tarefa = Tarefa::findOrFail($id);
-        return view('admin.tarefa.index', compact('tarefa'));
+        return view('Site.Pages.Tarefa.edit', compact('tarefa'));
     }
 
     /**

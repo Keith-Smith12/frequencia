@@ -5,8 +5,8 @@
               <div class="col-xxl">
                   <div class="card mb-4">
                     <div class="card-header d-flex align-items-center justify-content-between">
-                      <h5 class="mb-0">Basic Layout</h5>
-                      <small class="text-muted float-end">Default label</small>
+                      <h5 class="mb-0">Registre</h5>
+                      <small class="text-muted float-end">Criando uma conta</small>
                     </div>
                     <div class="card-body">
                     @if(session('error'))

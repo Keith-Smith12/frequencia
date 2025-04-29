@@ -38,22 +38,22 @@ public function create(){
         try{
          $user= User::findOrfail($id);    
         $request->validate([
-            "name" =>  "required|string" ,
+            "vc_nome" =>  "required|string" ,
             "email"=> "required" ,
             "password" => "required"
         ]);
         $user = $user->update($request->all());
-        return redirect('/user');
+        return redirect()->route('user.all')->with('success','usuário atualizado com sucesso!');
         }catch(Exception $e){
-            return redirect()->back()->with('error', 'Erro ao criar usuário: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Erro ao atualizar usuário: ' . $e->getMessage());
         }
     }
 
 
    public function edit($id){
     try{
-       $user= User::find($id);
-       return view('Site/Pages/User/edit',compact($user));
+        $user= User::findOrfail($id);
+       return view('Site/Pages/User/edit', compact('user'));
     }catch(Exception $e){
         return redirect()->back()->with('error', 'Erro ao editar usuário: ' . $e->getMessage());
     }
@@ -63,7 +63,7 @@ public function create(){
     try{
         $user= User::findOrfail($id);
         $user->delete($id);
-        redirect()->route('index');
+        redirect()->route('user.all')->with('success','usuário deletado com sucesso!');
     }catch(Exception $e){
         return redirect()->back()->with('error','Erro ao editar usuário', $e->getMessage());
     }
