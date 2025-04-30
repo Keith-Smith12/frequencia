@@ -37,7 +37,7 @@ class   JustificativaAtrasoController extends Controller
     public function create()
     {
         $tarefasUsuarios = TarefaUsuario::all(); 
-        return view('admin.justificativaAtraso.create', compact('tarefasUsuarios'));
+        return view('admin.justificativaAtraso.create', $data, compact('tarefasUsuarios'));
     }
 
     /**

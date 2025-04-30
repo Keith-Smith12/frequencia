@@ -5,7 +5,7 @@
         @foreach ($tarefasUsuarios as $tarefaUsuario)
                 <option value="{{ $tarefaUsuario->id }}"
                     {{ old('it_id_atraso', $justificativa->it_id_atraso ?? '') == $tarefaUsuario->id ? 'selected' : '' }}>
-                    {{ $tarefaUsuario->usuarios->vc_nome ?? 'Sem nome' }} - {{ $tarefaUsuario->tarefas->vc_nome ?? 'Sem título' }}
+                    {{ $justificativa->usuario ?? 'Sem nome' }} - {{ $tarefaUsuario->tarefas->vc_nome ?? 'Sem título' }}
                 </option>
         @endforeach
     </select>

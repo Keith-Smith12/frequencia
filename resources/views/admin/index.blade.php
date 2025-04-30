@@ -38,6 +38,12 @@
             <div class="count">{{ $totalJustificativas }}</div>
             <span class="count_bottom">Enviadas</span>
         </div>
+
+        <div class="col-md-2 tile_stats_count">
+            <span class="count_top"><i class="fa fa-clock-o"></i> Atrasos de tarefas</span>
+            <div class="count">{{ $totalAtrasosTarefas }}</div>
+            <span class="count_bottom">Detectados</span>
+        </div>
     </div>
 
     <!-- GRÁFICOS -->
@@ -90,7 +96,27 @@
                 <tbody>
                     @foreach($rankingAtrasos as $item)
                         <tr>
-                            <td>{{ optional($item->tarefaUsuario->usuario ?? null)->vc_nome }}</td>
+                            <td>{{ optional($item->usuario)->vc_nome }}</td>
+                            <td>{{ $item->total }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-md-6">
+            <h4>Ranking: Mais Faltas</h4>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Usuário</th>
+                        <th>Total de Atrasos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($rankingFaltas as $item)
+                        <tr>
+                            <td>{{ optional($item->usuario)->vc_nome }}</td>
                             <td>{{ $item->total }}</td>
                         </tr>
                     @endforeach

@@ -17,7 +17,8 @@
                         <table id="datatable-responsive" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Usuário</th>z
+                                    <th>Usuário</th>
+                                    <th>Tarefa</th>
                                     <th>Quantidade de Dias</th>
                                     <th>Ações</th>
                                 </tr>

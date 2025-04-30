@@ -17,6 +17,8 @@
                     <table id="datatable-responsive" class="table table-striped table-bordered">
                         <thead>
                             <tr>
+                                <th>Usuário</th>
+                                <th>Tarefa</th>
                                 <th>Data</th>
                                 <th>Descrição</th>
                                 <th>Usuário</th>
@@ -27,10 +29,10 @@
                         <tbody>
                             @foreach ($justificativasAtraso as $justificativa)
                                 <tr>
-                                    <td>{{ $justificativa->atraso->created_at }}</td> <!-- Data do Atraso -->
+                                    <td>{{ $justificativa->usuario }}</td> 
+                                    <td>{{ $justificativa->tarefa }}</td>
+                                    <td>{{ $justificativa->atraso->created_at }}</td> 
                                     <td>{{ $justificativa->vc_descricao }}</td>
-                                    <td>{{ $justificativa->usuario }}</td> <!-- Nome do Usuário -->
-                                    <td>{{ $justificativa->tarefa }}</td> <!-- Nome da Tarefa -->
                                     <td>
                                         <button class="btn btn-warning btn-sm" data-toggle="modal"
                                                 data-target="#modalEditar{{ $justificativa->id }}">Editar</button>

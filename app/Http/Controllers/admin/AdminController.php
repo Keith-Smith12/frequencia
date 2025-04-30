@@ -24,7 +24,8 @@ class AdminController extends Controller
         $totalTarefas = Tarefa::count();
         $totalPresencas = Frequencia::where('vc_tipo', 'presente')->count();
         $totalFaltas = Frequencia::where('vc_tipo', 'falta')->count();
-        $totalAtrasos = Atraso::count();
+        $totalAtrasos = Frequencia::where('vc_tipo', 'atraso')->count();
+        $totalAtrasosTarefas = Atraso::count();
         $totalJustificativas = JustificativaFalta::count() + JustificativaAtraso::count();
 
         // Gráfico de frequência (exemplo estático, pode ser adaptado com Carbon para dinamismo)
@@ -41,12 +42,21 @@ class AdminController extends Controller
             ->take(5)
             ->get();
 
-        $rankingAtrasos = Atraso::select('it_id_tarefa_usuario', DB::raw('count(*) as total'))
-            ->groupBy('it_id_tarefa_usuario')
+        $rankingAtrasos = Frequencia::select('it_id_usuario', DB::raw('count(*) as total'))
+            ->where('vc_tipo', 'atraso')
+            ->groupBy('it_id_usuario')
             ->orderByDesc('total')
-            ->with('tarefaUsuario.usuario')
+            ->with('usuario')
             ->take(5)
             ->get();
+        
+        $rankingFaltas = Frequencia::select('it_id_usuario', DB::raw('count(*) as total'))
+            ->where('vc_tipo', 'falta')
+            ->groupBy('it_id_usuario')
+            ->orderByDesc('total')
+            ->with('usuario')
+            ->take(5)
+            ->get();        
 
         return view('admin.index', compact(
             'totalUsuarios',
@@ -54,12 +64,14 @@ class AdminController extends Controller
             'totalPresencas',
             'totalFaltas',
             'totalAtrasos',
+            'totalAtrasosTarefas',
             'totalJustificativas',
             'labels',
             'presencas',
             'faltas',
             'rankingPresencas',
-            'rankingAtrasos'
+            'rankingAtrasos',
+            'rankingFaltas'
         ));
     }
 

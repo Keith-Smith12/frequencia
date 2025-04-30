@@ -4,10 +4,12 @@
     <select class="form-control" id="it_id_frequencia" name="it_id_frequencia" required>
         <option value="">Selecione a frequência</option>
         @foreach ($frequencias as $frequencia)
-            <option value="{{ $frequencia->id }}" 
-                    {{ old('it_id_frequencia', $justificativaFalta->it_id_frequencia ?? '') == $frequencia->id ? 'selected' : '' }}>
-                    {{ $frequencia->vc_tipo }} - {{ $frequencia->tm_hora_entrada }} a {{ $frequencia->tm_hora_saida }}
-            </option>
+            @if ($frequencia->vc_tipo == "falta")
+                <option value="{{ $frequencia->id }}" 
+                        {{ old('it_id_frequencia', $justificativaFalta->it_id_frequencia ?? '') == $frequencia->id ? 'selected' : '' }}>
+                        {{ $frequencia->vc_tipo }} - {{ $frequencia->tm_hora_entrada }} a {{ $frequencia->tm_hora_saida }}
+                </option>
+            @endif
         @endforeach
     </select>
 </div>
