@@ -58,8 +58,12 @@
                                                         data-dismiss="modal">&times;</button>
                                                 </div>
                                                 <div class="modal-body">
+<<<<<<< HEAD
                                                     <form action="{{ route('exemplo.update', ['id' => $exemplo->id]) }}"
                                                         method="POST">
+=======
+                                                    <form action="{{route('exemplo.update', ['id'=>$exemplo->id])}}" method="POST">
+>>>>>>> master
                                                         @csrf
                                                         @method('PUT')
                                                         @include('_form.exemplo.index')
@@ -87,7 +91,11 @@
                         </div>
                         <div class="modal-body">
                             <div class="modal-body">
+<<<<<<< HEAD
                                 <form action="{{ route('exemplo.store') }}" method="POST">
+=======
+                                <form action="{{route('exemplo.store')}}" method="POST">
+>>>>>>> master
                                     @csrf
                                     @method('POST')
                                     @include('_form.exemplo.index', ['exemplo' => null])

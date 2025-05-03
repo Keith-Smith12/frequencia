@@ -1,71 +1,198 @@
 @extends('layouts._includes.Admin.body')
 
-
 @section('conteudo')
-~
- <!-- page content -->
- <div class="right_col" role="main">
-    <!-- top tiles -->
+<div class="right_col" role="main">
     <div class="row tile_count">
-        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-            <span class="count_top"><i class="fa fa-user"></i> Total Users</span>
-            <div class="count">2500</div>
-            <span class="count_bottom"><i class="green">4% </i> From last Week</span>
+        <div class="col-md-2 tile_stats_count">
+            <span class="count_top"><i class="fa fa-users"></i> Usuários</span>
+            <div class="count">{{ $totalUsuarios }}</div>
+            <span class="count_bottom">Total de usuários</span>
         </div>
-        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-            <span class="count_top"><i class="fa fa-clock-o"></i> Average Time</span>
-            <div class="count">123.50</div>
-            <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last
-                Week</span>
+
+        <div class="col-md-2 tile_stats_count">
+            <span class="count_top"><i class="fa fa-tasks"></i> Tarefas</span>
+            <div class="count">{{ $totalTarefas }}</div>
+            <span class="count_bottom">Tarefas criadas</span>
         </div>
-        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-            <span class="count_top"><i class="fa fa-user"></i> Total Males</span>
-            <div class="count green">2,500</div>
-            <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last
-                Week</span>
+
+        <div class="col-md-2 tile_stats_count">
+            <span class="count_top"><i class="fa fa-calendar-check-o"></i> Presenças</span>
+            <div class="count">{{ $totalPresencas }}</div>
+            <span class="count_bottom">Registradas</span>
         </div>
-        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-            <span class="count_top"><i class="fa fa-user"></i> Total Females</span>
-            <div class="count">4,567</div>
-            <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> From last
-                Week</span>
+
+        <div class="col-md-2 tile_stats_count">
+            <span class="count_top"><i class="fa fa-calendar-times-o"></i> Faltas</span>
+            <div class="count">{{ $totalFaltas }}</div>
+            <span class="count_bottom">Acumuladas</span>
         </div>
-        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-            <span class="count_top"><i class="fa fa-user"></i> Total Collections</span>
-            <div class="count">2,315</div>
-            <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last
-                Week</span>
+
+        <div class="col-md-2 tile_stats_count">
+            <span class="count_top"><i class="fa fa-clock-o"></i> Atrasos</span>
+            <div class="count">{{ $totalAtrasos }}</div>
+            <span class="count_bottom">Detectados</span>
         </div>
-        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-            <span class="count_top"><i class="fa fa-user"></i> Total Connections</span>
-            <div class="count">7,325</div>
-            <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last
-                Week</span>
+
+        <div class="col-md-2 tile_stats_count">
+            <span class="count_top"><i class="fa fa-commenting"></i> Justificativas</span>
+            <div class="count">{{ $totalJustificativas }}</div>
+            <span class="count_bottom">Enviadas</span>
+        </div>
+
+        <div class="col-md-2 tile_stats_count">
+            <span class="count_top"><i class="fa fa-clock-o"></i> Atrasos de tarefas</span>
+            <div class="count">{{ $totalAtrasosTarefas }}</div>
+            <span class="count_bottom">Detectados</span>
         </div>
     </div>
-    <!-- /top tiles -->
 
-    <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="dashboard_graph">
-
-
-
-                </div>
-
-                <div class="clearfix"></div>
-            </div>
+    <!-- GRÁFICOS -->
+    <div class="row mt-4">
+        <!-- Gráfico de Linha -->
+        <div class="col-md-6">
+            <h4>Gráfico de Linha: Frequência Semanal</h4>
+            <canvas id="graficoLinhaFrequencia" height="150"></canvas>
         </div>
 
+        <!-- Gráfico de Pizza -->
+        <div class="col-md-6">
+            <h4>Gráfico de Pizza: Total da Semana</h4>
+            <canvas id="graficoPizzaFrequencia" height="150"></canvas>
+        </div>
     </div>
-    <br />
 
-    <div class="row">
+    <!-- Ranking de Presenças -->
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <h4>Ranking: Mais Presenças</h4>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Usuário</th>
+                        <th>Total de Presenças</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($rankingPresencas as $item)
+                        <tr>
+                            <td>{{ optional($item->usuario)->vc_nome }}</td>
+                            <td>{{ $item->total }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
 
+        <!-- Ranking de Atrasos -->
+        <div class="col-md-6">
+            <h4>Ranking: Mais Atrasos</h4>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Usuário</th>
+                        <th>Total de Atrasos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($rankingAtrasos as $item)
+                        <tr>
+                            <td>{{ optional($item->usuario)->vc_nome }}</td>
+                            <td>{{ $item->total }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
 
-
+        <div class="col-md-6">
+            <h4>Ranking: Mais Faltas</h4>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Usuário</th>
+                        <th>Total de Atrasos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($rankingFaltas as $item)
+                        <tr>
+                            <td>{{ optional($item->usuario)->vc_nome }}</td>
+                            <td>{{ $item->total }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
-<!-- /page content -->
-
 @endsection
+
+@push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const labels = {!! json_encode($labels) !!};
+    const presencas = {!! json_encode($presencas) !!};
+    const faltas = {!! json_encode($faltas) !!};
+
+    // Gráfico de Linha
+    new Chart(document.getElementById('graficoLinhaFrequencia').getContext('2d'), {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'Presenças',
+                    data: presencas,
+                    borderColor: '#2ecc71',
+                    backgroundColor: 'rgba(46, 204, 113, 0.2)',
+                    tension: 0.3,
+                    fill: true
+                },
+                {
+                    label: 'Faltas',
+                    data: faltas,
+                    borderColor: '#e74c3c',
+                    backgroundColor: 'rgba(231, 76, 60, 0.2)',
+                    tension: 0.3,
+                    fill: true
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { position: 'top' },
+                title: {
+                    display: true,
+                    text: 'Frequência semanal (Linha)'
+                }
+            }
+        }
+    });
+
+    // Gráfico de Pizza (total geral da semana)
+    const totalPresencas = presencas.reduce((a, b) => a + b, 0);
+    const totalFaltas = faltas.reduce((a, b) => a + b, 0);
+
+    new Chart(document.getElementById('graficoPizzaFrequencia').getContext('2d'), {
+        type: 'pie',
+        data: {
+            labels: ['Presenças', 'Faltas'],
+            datasets: [{
+                data: [totalPresencas, totalFaltas],
+                backgroundColor: ['#2ecc71', '#e74c3c']
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { position: 'top' },
+                title: {
+                    display: true,
+                    text: 'Total de Frequência (Pizza)'
+                }
+            }
+        }
+    });
+</script>
+@endpush

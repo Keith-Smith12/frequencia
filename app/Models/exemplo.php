@@ -9,10 +9,11 @@ class exemplo extends Model
     //
 
     protected $fillable = [
-        'nome',
-        'valor',
-        'descricao',
-        'observacao',
-        'ativo'
-    ];
+            'nome',
+            'valor',
+            'descricao',
+            'observacao',
+            'ativo'
+        ];
+
 }

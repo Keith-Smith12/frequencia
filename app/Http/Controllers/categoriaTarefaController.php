@@ -17,7 +17,6 @@ class categoriaTarefaController extends Controller
         $categoriasTarefas = categoria_Tarefas::all();
         $tarefas = Tarefa::all();
         view('tarefas.index', compact('categoriasTarefas', 'tarefas'));
-        // dd($categoriasTarefas);
         return view('categoriasTarefas.index', compact('categoriasTarefas'));
     }
 

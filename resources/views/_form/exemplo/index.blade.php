@@ -1,13 +1,15 @@
 <div class="form-group">
     <label for="nome">Nome</label>
-    <input type="text" class="form-control" id="nome" name="nome" required placeholder="Digite seu nome"
-        value="{{ old('nome', isset($exemplo) ? $exemplo->nome : '') }}">
+    <input type="text" class="form-control" id="nome" name="nome" required
+           placeholder="Digite seu nome"
+           value="{{ old('nome', isset($exemplo) ? $exemplo->nome : '') }}">
 </div>
 
 <div class="form-group">
     <label for="valor">Valor</label>
     <input type="number" class="form-control" id="valor" name="valor" step="0.01" required
-        placeholder="Digite o valor" value="{{ old('valor', isset($exemplo) ? $exemplo->valor : '') }}">
+           placeholder="Digite o valor"
+           value="{{ old('valor', isset($exemplo) ? $exemplo->valor : '') }}">
 </div>
 
 <div class="form-group">
@@ -23,7 +25,7 @@
 <div class="form-group">
     <div class="form-check">
         <input type="checkbox" class="form-check-input" id="ativo" name="ativo"
-            {{ old('ativo', isset($exemplo) ? $exemplo->ativo : true) ? 'checked' : '' }}>
+               {{ old('ativo', isset($exemplo) ? $exemplo->ativo : true) ? 'checked' : '' }}>
         <label class="form-check-label" for="ativo">Ativo</label>
     </div>
 </div>

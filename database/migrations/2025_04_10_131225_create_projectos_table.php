@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tarefas',
-        function(Blueprint $table){
+        Schema::create('projectos', function (Blueprint $table) {
             $table->id();
             $table->string('vc_nome');
-            $table->string('vc_descricao')->nullable();
-            $table->date('dt_data_entrega');
-            $table->string('vc_portador');
-            $table->string('ativo');
+            $table->date('dt_data_inicio');
+            $table->date('dt_data_conclusao');
+            $table->integer('it_estado');
+            $table->string('vc_prioridade');
+            $table->integer('it_id_usuario');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tarefas');
+        Schema::dropIfExists('projectos');
     }
 };
