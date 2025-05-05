@@ -51,7 +51,7 @@ Route::prefix('frequencia')->group(function () {
 
 Route::prefix('tarefa')->group(function () {
     Route::get('/', [TarefaController::class, 'index'])->name('tarefa.index');
-    Route::getrud('/create', [TarefaController::class, 'create'])->name('tarefa.create');
+    Route::get('/create', [TarefaController::class, 'create'])->name('tarefa.create');
     Route::put('/{id}', [TarefaController::class, 'edit'])->name('tarefa.edit');
     Route::post('/', [TarefaController::class, 'store'])->name('tarefa.store');
     Route::get('/{id}', [TarefaController::class, 'show'])->name('tarefa.show');
