@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('vc_classe')->nullable();
-            $table->string('vc_tipo')->nullable();
+            $table->string('vc_tipo')->default('user');
             $table->rememberToken();
             $table->timestamps();
         });

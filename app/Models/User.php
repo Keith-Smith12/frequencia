@@ -17,12 +17,19 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
+    public function isAdmin(): bool
+    {
+        return $this->vc_tipo === 'admin';
+    }
+
     protected $fillable = [
         'vc_nome',
         'email',
         'password',
+        'vc_tipo'
     ];
 
+    
     /**
      * The attributes that should be hidden for serialization.
      *

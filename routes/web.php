@@ -8,14 +8,35 @@ use App\Http\Controllers\admin\JustificativaFaltaController;
 use App\Http\Controllers\admin\ProjectoController;
 use App\Http\Controllers\admin\TarefaController;
 use App\Http\Controllers\admin\TarefaUsuarioController;
-
+use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\UserMiddleware;
 
 Route::get('/', function () {
     return view('Site.auth.login');
 })->name('login');
+
 Route::get('/register', function () {
     return view('Site.auth.register');
 })->name('register');
+
+Route::middleware('user')->group(function () {
+    Route::prefix('user')->group(function () {
+        Route::get('/', ['as' => 'user.index', 'uses' => "App\Http\Controllers\admin\UserController@index"]);
+        Route::get('/all', ['as' => 'user.all', 'uses' => "App\Http\Controllers\admin\UserController@all"]);
+        Route::get('/show/{id}', ['as' => 'user.show', 'uses' => "App\Http\Controllers\admin\UserController@show"]);
+        Route::get('/create', ['as' => 'user.create', 'uses' => "App\Http\Controllers\admin\UserController@create"]);
+        Route::post('/store', ['as' => 'user.store', 'uses' => "App\Http\Controllers\admin\UserController@store"]);
+        Route::put('/edit/{id}', ['as' => 'user.edit', 'uses' => "App\Http\Controllers\admin\UserController@edit"]);   
+        Route::post('/update/{id}', ['as' => 'user.update', 'uses' => "App\Http\Controllers\admin\UserController@update"]);
+        Route::delete('/delete/{id}', ['as' => 'user.delete', 'uses' => "App\Http\Controllers\admin\UserController@delete"]);
+    });
+});
+
+Route::middleware('admin')->group(function () {
+    Route::get('/register', function () {
+        return view('Site.auth.register');
+    })->name('register'); 
+});
 
 Route::prefix('user')->group(function () {
     Route::get('/', ['as' => 'user.index', 'uses' => "App\Http\Controllers\admin\UserController@index"]);
@@ -27,6 +48,9 @@ Route::prefix('user')->group(function () {
     Route::post('/update/{id}', ['as' => 'user.update', 'uses' => "App\Http\Controllers\admin\UserController@update"]);
     Route::delete('/delete/{id}', ['as' => 'user.delete', 'uses' => "App\Http\Controllers\admin\UserController@delete"]);
 });
+
+
+
 
 Route::prefix('auth')->group(function () {
     Route::post('/login', ['as' => 'auth.login', 'uses' => "App\Http\Controllers\Auth\AuthController@login"]);

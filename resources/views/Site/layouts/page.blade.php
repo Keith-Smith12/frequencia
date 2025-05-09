@@ -264,6 +264,7 @@
                     </li>
                     <li>
                       <form action="{{route('auth.logout')}}" method="post">
+                        @csrf
                          <button type="submit" class="dropdown-item">
                           <i class="bx bx-power-off me-2"></i>Logout
                          </button>

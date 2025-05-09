@@ -3,6 +3,12 @@
 @section('conteudo')
 
               <div class="row">
+            @if(session('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+               {{ session('error') }}
+               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            @endif
                 <div class="col-lg-8 mb-4 order-0">
                   <div class="card">
                     <div class="d-flex align-items-end row">
