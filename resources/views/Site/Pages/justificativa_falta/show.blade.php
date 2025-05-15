@@ -1,5 +1,5 @@
 @extends('Site/layouts/page')
-@section('title') Lista de Usuários @endsection
+@section('title') Lista de Justificativas de Falta @endsection
 @section('conteudo')
 
 @if(session('success'))
@@ -18,39 +18,35 @@
 
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
-        <h5 class="mb-0">Lista de Atrasos</h5>
-        <a href="{{ route('atraso.create') }}" class="btn btn-primary">+ Adicionar</a>
+        <h5 class="mb-0">Lista de Justificativas</h5>
+        <a href="{{ route('justificativa_falta.create') }}" class="btn btn-primary">+ Adicionar</a>
     </div>
-    
+
     <div class="table-responsive text-nowrap">
-        <table class="table">
+        <table class="table table-hover">
             <thead class="table-dark">
                 <tr>
-                    <th>#</th>
-                    <th>Usuário</th>
-                    <th>Tarefa</th>
-                    <th>Quantidade de Dias</th>
+                    <th>Tipo de Frequência</th>
+                    <th>Descrição</th>
                     <th>Ações</th>
                 </tr>
             </thead>
-            
+
             <tbody class="table-border-bottom-0">
-                @foreach ($atrasos as $atraso)
+                @forelse ($justificativas as $justificativa)
                 <tr>
-                    <td>{{ $atraso->id }}</td>
-                    <td>{{ $atraso->usuario }}</td>
-                    <td>{{ $atraso->tarefa }}</td> 
-                    <td>{{ $atraso->qtd_dias }}</td>
+                    <td>{{ $justificativa->f_tipo }}</td>
+                    <td>{{ $justificativa->vc_descricao }}</td>
                     <td>
                         <div class="dropdown">
                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                                 <i class="bx bx-dots-vertical-rounded"></i>
                             </button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="{{ route('atraso.edit', $atraso->id) }}">
+                                <a class="dropdown-item" href="{{ route('justificativa_falta.edit', $justificativa->id) }}">
                                     <i class="bx bx-edit-alt me-1"></i> Editar
                                 </a>
-                                <form action="{{ route('atraso.destroy', $atraso->id) }}" method="POST" class="d-inline">
+                                <form action="{{ route('justificativa_falta.destroy', $justificativa->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="dropdown-item" onclick="return confirm('Tem certeza que deseja excluir?')">
@@ -61,7 +57,11 @@
                         </div>
                     </td>
                 </tr>
-                @endforeach
+                @empty
+                <tr>
+                    <td colspan="3" class="text-center">Nenhuma justificativa encontrada</td>
+                </tr>
+                @endforelse
             </tbody>
         </table>
     </div>

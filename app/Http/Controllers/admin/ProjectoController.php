@@ -13,16 +13,16 @@ class ProjectoController extends Controller
 
     public function index()
     {
-        $data['projectos'] = Projecto::join('usuarios', 'projectos.it_id_usuario', '=', 'usuarios.id')
+        $data['projectos'] = Projecto::join('users', 'projectos.it_id_usuario', '=', 'users.id')
             ->select(
                 'projectos.*',
-                'usuarios.vc_nome as u_nome'
+                'users.vc_nome as u_nome'
             )
             ->get();
 
-        $usuarios = \App\Models\Usuario::all(); 
+        $usuarios = \App\Models\User::all(); 
 
-        return view('admin.projecto.index', $data, compact('usuarios'));
+        return view('Site.Pages.projecto.show', $data, compact('usuarios'));
     }
 
     /**
@@ -30,8 +30,8 @@ class ProjectoController extends Controller
      */
     public function create()
     {
-        $usuarios = \App\Models\Usuario::all();  
-        return view('admin.projecto.create', compact('usuarios'));
+        $usuarios = \App\Models\User::all();  
+        return view('Site.Pages.projecto.create', compact('usuarios'));
     }
 
     /**
@@ -64,7 +64,8 @@ class ProjectoController extends Controller
     public function show($id)
     {
         $projecto = Projecto::findOrFail($id);
-        return view('admin.projecto.index', compact('projecto'));
+        $usuarios = \App\Models\User::all();  
+        return view('admin.projecto.index', compact('projecto', 'usuarios'));
     }
 
     /**
@@ -73,7 +74,8 @@ class ProjectoController extends Controller
     public function edit($id)
     {
         $projecto = Projecto::findOrFail($id);
-        return view('admin.projecto.index', compact('projecto'));
+        $usuarios = \App\Models\User::all();  
+        return view('Site.Pages.projecto.edit', compact('projecto', 'usuarios'));
     }
 
     /**

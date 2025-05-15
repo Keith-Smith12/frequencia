@@ -17,17 +17,17 @@ class AtrasoController extends Controller
     public function index()
     {
         $data['atrasos'] = Atraso::join('tarefa_usuarios', 'atrasos.it_id_tarefa_usuario', '=', 'tarefa_usuarios.id')
-            ->join('usuarios', 'tarefa_usuarios.it_id_usuario', '=', 'usuarios.id')
+            ->join('users', 'tarefa_usuarios.it_id_usuario', '=', 'users.id')
             ->join('tarefas', 'tarefa_usuarios.it_id_tarefa', '=', 'tarefas.id')
             ->select(
                 'atrasos.*',
-                'usuarios.vc_nome as usuario',     
+                'users.vc_nome as usuario',     
                 'tarefas.vc_nome as tarefa'     
             )
             ->get();
+            
 
-            $tarefasUsuarios = TarefaUsuario::all(); 
-            return view('admin.atraso.index', $data, compact('tarefasUsuarios'));
+            return view('Site.Pages.atraso.show', $data );
             
     }
 
@@ -37,7 +37,7 @@ class AtrasoController extends Controller
     public function create()
     {
         $tarefasUsuarios = TarefaUsuario::all(); 
-        return view('admin.atraso.create', compact('tarefasUsuarios'));
+        return view('Site.Pages.atraso.create', compact('tarefasUsuarios'));
     }
 
 
@@ -76,8 +76,9 @@ class AtrasoController extends Controller
      */
     public function edit($id)
     {
+        $tarefasUsuarios = TarefaUsuario::all(); 
         $atraso = Atraso::findOrFail($id);
-        return view('admin.atraso.index', compact('atraso'));
+        return view('Site.Pages.atraso.edit', compact('atraso', 'tarefasUsuarios'));
     }
 
     /**

@@ -9,28 +9,42 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller {
 
-    public function index(){
-        return view ('Site/layouts/dashboard');
-    }
-    public function all(){
-        $users=User::all();
-        return view ('Site/Pages/user/show',compact('users'));
+
+
+    public function index()
+    {
+        return view ('Site.layouts.dashboard');
     }
 
-public function create(){
-    return view('Site/Pages/User/create');
-}
-    public function store(Request $request){
-        try{
-        $request->validate([
-            "vc_nome" =>  "required|string" ,
-            "email"=> "required" ,
-            "password" => "required"
-        ]);
-        $user=User::create($request->all());
-        return redirect('/');
-        }catch(Exception $e){
-            return redirect('/')->with('error','Erro ao criar usuário'. $e->getMessage());
+    public function all()
+    {
+        $users = User::all();
+        return view ('Site.Pages.user.show',compact('users'));
+        
+    }
+    
+    public function create()
+    {
+        return view('Site.Pages.User.create');
+    }
+
+    public function store(Request $request)
+    {
+        try
+        {
+            $request->validate([
+                "vc_nome" =>  "required|string" ,
+                "email"=> "required" ,
+                "password" => "required",
+                'vc_classe' => "required",
+                'vc_tipo' => "required",
+            ]);
+            $user=User::create($request->all());
+            return redirect()->route('user.all')->with('success','usuário atualizado com sucesso!');
+        }
+        catch(Exception $e)
+        {
+            return redirect()->back()->with('error', 'Erro ao atualizar usuário: ' . $e->getMessage());
         }
     }
 
@@ -40,7 +54,8 @@ public function create(){
         $request->validate([
             "vc_nome" =>  "required|string" ,
             "email"=> "required" ,
-            "password" => "required"
+            "password" => "required",
+            'vc_classe' => "required",
         ]);
         $user = $user->update($request->all());
         return redirect()->route('user.all')->with('success','usuário atualizado com sucesso!');
@@ -63,7 +78,7 @@ public function create(){
     try{
         $user= User::findOrfail($id);
         $user->delete($id);
-        redirect()->route('user.all')->with('success','usuário deletado com sucesso!');
+        return redirect()->route('user.all')->with('success','usuário deletado com sucesso!');
     }catch(Exception $e){
         return redirect()->back()->with('error','Erro ao editar usuário', $e->getMessage());
     }

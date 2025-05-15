@@ -18,13 +18,13 @@ class JustificativaFaltaController extends Controller
         $data['justificativas'] = JustificativaFalta::join('frequencias', 'justificativa_faltas.it_id_frequencia', '=', 'frequencias.id')
             ->select(
                 'justificativa_faltas.*',
-                'frequencias.vc_tipo as f_tipo' // Seleciona o tipo da frequência
+                'frequencias.vc_tipo as f_tipo' 
             )
             ->get();
 
         $frequencias = \App\Models\Frequencia::all(); 
 
-        return view('admin.justificativa_falta.index', $data, compact('frequencias'));
+        return view('Site.Pages.justificativa_falta.show', $data, compact('frequencias'));
     }
 
     /**
@@ -33,7 +33,7 @@ class JustificativaFaltaController extends Controller
     public function create()
     {
         $frequencias = \App\Models\Frequencia::all();  
-        return view('admin.justificativa_falta.create', compact('frequencias'));
+        return view('Site.Pages.justificativa_falta.create', compact('frequencias'));
     }
 
     /**
@@ -62,7 +62,7 @@ class JustificativaFaltaController extends Controller
     public function show($id)
     {
         $justificativaFalta = JustificativaFalta::findOrFail($id);
-        return view('admin.justificativa_falta.index', compact('justificativaFalta'));
+        return view('Site.Pages.justificativa_falta.index', compact('justificativaFalta'));
     }
 
     /**
@@ -70,8 +70,9 @@ class JustificativaFaltaController extends Controller
      */
     public function edit($id)
     {
+        $frequencias = \App\Models\Frequencia::all(); 
         $justificativaFalta = JustificativaFalta::findOrFail($id);
-        return view('admin.justificativa_falta.index', compact('justificativaFalta'));
+        return view('Site.Pages.justificativa_falta.edit', compact('justificativaFalta', 'frequencias'));
     }
 
     /**

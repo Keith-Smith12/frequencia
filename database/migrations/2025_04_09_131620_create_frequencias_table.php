@@ -16,7 +16,8 @@ return new class extends Migration
             $table->date('dt_data');
             $table->time('tm_hora_entrada');
             $table->time('tm_hora_saida');
-            $table->integer('it_id_usuario');
+            $table->unsignedBigInteger('it_id_usuario');
+            $table->foreign('it_id_usuario')->references('id')->on('users')->cascadeOnDelete();
             $table->string('vc_tipo');
             $table->timestamps();
         });

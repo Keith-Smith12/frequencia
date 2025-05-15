@@ -1,3 +1,4 @@
+
 @extends('Site/layouts/page')
 @section('title')Dashboard @endsection
 @section('conteudo')

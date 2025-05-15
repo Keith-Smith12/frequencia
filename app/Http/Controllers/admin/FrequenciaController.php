@@ -13,16 +13,16 @@ class FrequenciaController extends Controller
 
     public function index()
     {
-        $data['frequencias'] = Frequencia::join('usuarios', 'frequencias.it_id_usuario', '=', 'usuarios.id')
+        $data['frequencias'] = Frequencia::join('users', 'frequencias.it_id_usuario', '=', 'users.id')
             ->select(
                 'frequencias.*',
-                'usuarios.vc_nome as u_nome'
+                'users.vc_nome as u_nome'
             )
             ->get();
 
-        $usuarios = \App\Models\Usuario::all(); 
+        $usuarios = \App\Models\User::all(); 
 
-        return view('admin.frequencia.index', $data, compact('usuarios'));
+        return view('Site.Pages.frequencia.show', $data, compact('usuarios'));
     }
 
 
@@ -31,8 +31,8 @@ class FrequenciaController extends Controller
      */
     public function create()
     {
-        $usuarios = \App\Models\Usuario::all();  
-        return view('admin.frequencia.create', compact('usuarios'));
+        $usuarios = \App\Models\User::all();  
+        return view('Site.Pages.frequencia.create', compact('usuarios'));
     }
 
     /**
@@ -73,11 +73,17 @@ class FrequenciaController extends Controller
     /**
      * Exibir formulário de edição.
      */
-    public function edit($id)
-    {
-        $frequencia = Frequencia::findOrFail($id);
-        return view('admin.frequencia.index', compact('frequencia'));
-    }
+  
+        public function edit($id){
+            try{
+                $usuarios = \App\Models\User::all();  
+                $frequencia = Frequencia::findOrFail($id);
+               return view('Site/Pages/frequencia/edit', compact('usuarios', 'frequencia'));
+            }catch(Exception $e){
+                return redirect()->back()->with('error', 'Erro ao editar usuário: ' . $e->getMessage());
+            }
+        }
+    
 
     /**
      * Atualizar um exemplo.
