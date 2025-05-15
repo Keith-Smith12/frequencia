@@ -11,4 +11,6 @@ class TarefaUsuario extends Model
         'it_id_tarefa',
         'dt_data_atribuicao'
     ];
+
+    
 }

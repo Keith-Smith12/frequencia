@@ -1,5 +1,5 @@
 @extends('Site/layouts/page')
-@section('title') Editar Usuário @endsection
+@section('title') Editar Justificativa de Atraso @endsection
 @section('conteudo')
 
 @if(session('error'))
@@ -19,20 +19,20 @@
 <div class="col-12 grid-margin stretch-card">
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Editar Atraso</h4>
-            <p class="card-description">Atualize as informações do usuário</p>
+            <h4 class="card-title">Editar Justificativa</h4>
+            <p class="card-description">Atualize as informações da justificativa</p>
             
-            <form action="{{ route('atraso.update', $atraso->id) }}" method="POST" class="forms-sample">
+            <form action="{{ route('justificativaAtraso.update', $justificativa->id) }}" method="POST" class="forms-sample">
                 @csrf
                 @method('PUT')
                 
                 <div class="mb-3">
-                    <label class="form-label" for="it_id_tarefa_usuario">Usuário e Tarefa</label>
-                    <select class="form-select" id="it_id_tarefa_usuario" name="it_id_tarefa_usuario" required>
+                    <label class="form-label" for="it_id_atraso">Usuário e Tarefa</label>
+                    <select class="form-select" id="it_id_atraso" name="it_id_atraso" required>
                         <option value="">Selecione a tarefa e o usuário</option>
                         @foreach ($tarefasUsuarios as $tarefaUsuario)
-                        <option value="{{ $tarefaUsuario->id }}" 
-                            {{ old('it_id_tarefa_usuario', $atraso->it_id_tarefa_usuario ?? '') == $tarefaUsuario->id ? 'selected' : '' }}>
+                        <option value="{{ $tarefaUsuario->id }}"
+                            {{ old('it_id_atraso', $justificativa->it_id_atraso ?? '') == $tarefaUsuario->id ? 'selected' : '' }}>
                             {{ $tarefaUsuario->usuarios->vc_nome ?? 'Sem nome' }} - {{ $tarefaUsuario->tarefas->vc_nome ?? 'Sem título' }}
                         </option>
                         @endforeach
@@ -40,15 +40,14 @@
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label" for="qtd_dias">Quantidade de Dias de Atraso</label>
-                    <input type="number" class="form-control" id="qtd_dias" name="qtd_dias" required 
-                        placeholder="Digite a quantidade de dias de atraso"
-                        value="{{ old('qtd_dias', $atraso->qtd_dias ?? '') }}">
+                    <label class="form-label" for="vc_descricao">Justificativa</label>
+                    <textarea class="form-control" id="vc_descricao" name="vc_descricao" rows="3"
+                        placeholder="Digite a justificativa" required>{{ old('vc_descricao', $justificativa->vc_descricao ?? '') }}</textarea>
                 </div>
                 
                 <div class="d-flex justify-content-between mt-4">
                     <button type="submit" class="btn btn-primary me-2">Atualizar</button>
-                    <a href="{{ route('atraso.index') }}" class="btn btn-light">Cancelar</a>
+                    <a href="{{ route('justificativaAtraso.index') }}" class="btn btn-light">Cancelar</a>
                 </div>
             </form>
         </div>

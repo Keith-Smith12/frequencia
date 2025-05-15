@@ -24,7 +24,7 @@ class TarefaUsuarioController extends Controller
         $data['usuarios'] = \App\Models\User::all();
         $data['tarefas'] = \App\Models\Tarefa::all();
     
-        return view('admin.tarefaUsuario.index', $data);
+        return view('Site.Pages.tarefaUsuario.show', $data);
     }
     
 
@@ -36,7 +36,7 @@ class TarefaUsuarioController extends Controller
         $data['usuarios'] = \App\Models\User::all();
         $data['tarefas'] = \App\Models\Tarefa::all();
     
-        return view('admin.tarefaUsuario.create', $data);
+        return view('Site.Pages.tarefaUsuario.create', $data);
     }
 
     /**
@@ -78,7 +78,7 @@ class TarefaUsuarioController extends Controller
     public function edit($id)
     {
         $tarefaUsuario = TarefaUsuario::findOrFail($id);
-        return view('admin.tarefaUsuario.index', compact('tarefaUsuario'));
+        return view('Site.Pages.tarefaUsuario.edit', compact('tarefaUsuario'));
     }
 
     /**

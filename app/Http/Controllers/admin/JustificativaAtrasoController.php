@@ -16,15 +16,19 @@ class JustificativaAtrasoController extends Controller
      */
     public function index()
     {
-        $data['justificativaAtrasos'] = JustificativaAtraso::join('tarefa_usuarios', 'justificativa_atrasos.it_id_atraso', '=', 'atrasos.id')
+        $data['justificativasAtraso'] = JustificativaAtraso::join('atrasos', 'justificativa_atrasos.it_id_atraso', '=', 'atrasos.id')
+            ->join('tarefa_usuarios', 'atrasos.it_id_tarefa_usuario', '=', 'tarefa_usuarios.id')
+            ->join('users', 'tarefa_usuarios.it_id_usuario', '=', 'users.id')
+            ->join('tarefas', 'tarefa_usuarios.it_id_tarefa', '=', 'tarefas.id')
             ->select(
                 'justificativa_atrasos.*',
-                'atrasos.qtd_dias as dias',       
+                'users.vc_nome as usuario',     
+                'tarefas.vc_nome as tarefa'     
             )
             ->get();
 
-            $tarefasUsuarios = TarefaUsuario::all(); 
-            return view('admin.justificativaAtraso.index', $data, compact('tarefasUsuarios'));
+        $tarefasUsuarios = TarefaUsuario::all(); 
+            return view('Site.Pages.justificativaAtraso.show', $data, compact('tarefasUsuarios'));
             
     }
 
@@ -34,7 +38,7 @@ class JustificativaAtrasoController extends Controller
     public function create()
     {
         $tarefasUsuarios = TarefaUsuario::all(); 
-        return view('admin.justificativaAtraso.create', compact('tarefasUsuarios'));
+        return view('Site.Pages.justificativaAtraso.create', compact('tarefasUsuarios'));
     }
 
 
@@ -45,8 +49,8 @@ class JustificativaAtrasoController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'it_id_tarefa_usuario' => 'required|integer|exists:tarefa_usuarios,id', 
-            'qtd_dias' => 'required|integer|min:1', 
+            'it_id_atraso' => 'required|integer|exists:atrasos,id',  
+            'vc_descricao' => 'required|string|min:5', 
         ]);        
 
         try {
@@ -73,8 +77,9 @@ class JustificativaAtrasoController extends Controller
      */
     public function edit($id)
     {
-        $justificativaAtraso = JustificativaAtraso::findOrFail($id);
-        return view('admin.justificativaAtraso.index', compact('atraso'));
+        $tarefasUsuarios = TarefaUsuario::all(); 
+        $justificativa = JustificativaAtraso::findOrFail($id);
+        return view('Site.Pages.justificativaAtraso.edit', compact('tarefasUsuarios', 'justificativa'));
     }
 
     /**
@@ -83,8 +88,8 @@ class JustificativaAtrasoController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'it_id_tarefa_usuario' => 'required|integer|exists:tarefa_usuarios,id', 
-            'qtd_dias' => 'required|integer|min:1', 
+            'it_id_atraso' => 'required|integer|exists:atrasos,id',  
+            'vc_descricao' => 'required|string|min:5', 
         ]);
 
         try {

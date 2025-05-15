@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tarefas', function (Blueprint $table) {
-            $table->id(); 
-            $table->string('vc_nome'); 
-            $table->unsignedBigInteger('it_id_projecto'); 
-            $table->unsignedBigInteger('it_id_cat_tarefa');
-            $table->date('dt_data_entrega'); 
+        Schema::create('categoria_tarefas', function (Blueprint $table) {
+            $table->id();
+            $table->string('vc_nome');
+            $table->string('vc_descricao'); 
+            $table->string('vc_prioridade'); 
+            $table->string('vc_tipo');  
+            $table->Integer('it_tempo_estimado'); 
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tarefas');
+        Schema::dropIfExists('categoria_tarefas');
     }
 };

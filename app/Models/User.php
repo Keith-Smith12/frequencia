@@ -21,6 +21,8 @@ class User extends Authenticatable
         'vc_nome',
         'email',
         'password',
+        'vc_classe',
+        'vc_tipo',
     ];
 
     /**
