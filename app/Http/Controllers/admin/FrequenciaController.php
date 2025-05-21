@@ -4,25 +4,39 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Frequencia;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class FrequenciaController extends Controller
 {
 
     public function index()
-    {
-        $data['frequencias'] = Frequencia::join('users', 'frequencias.it_id_usuario', '=', 'users.id')
+    {   if (Auth::user()->vc_tipo == 'admin') {
+              $data['frequencias'] = Frequencia::join('users', 'frequencias.it_id_usuario', '=', 'users.id')
             ->select(
                 'frequencias.*',
                 'users.vc_nome as u_nome'
-            )
-            ->get();
+            )->get();
 
-        $usuarios = \App\Models\User::all(); 
+        $usuarios = User::all(); 
 
         return view('Site.Pages.frequencia.show', $data, compact('usuarios'));
+    } elseif (Auth::user()->vc_tipo == 'user') {
+               $data['frequencias'] = Frequencia::join('users', 'frequencias.it_id_usuario', '=', 'users.id')
+               ->where('frequencias.it_id_usuario',Auth::user()->id)->where('frequencias.vc_tipo', 'Falta')
+               ->select(
+                'frequencias.*',
+                'users.vc_nome as u_nome'
+            )->get();
+
+        $usuarios = User::find(Auth::user()->id); 
+        return view('Site.Pages.frequencia.falta', $data, compact('usuarios'));
+    } 
+    
+
     }
 
 

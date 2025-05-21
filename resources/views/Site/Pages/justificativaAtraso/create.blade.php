@@ -40,10 +40,9 @@
                             placeholder="Digite a justificativa" required>{{ old('vc_descricao', $justificativa->vc_descricao ?? '') }}</textarea>
                     </div>
 
-                    <div class="row justify-content-end mt-4">
-                        <div class="col-sm">
-                            <button type="submit" class="btn btn-primary">Criar Justificativa</button>
-                        </div>
+                    <div class="d-flex justify-content-end gap-2">
+                        <a href="{{ route('justificativoAtraso.index') }}" class="btn btn-outline-secondary">Cancelar</a>
+                        <button type="submit" class="btn btn-primary">Criar Justificativa</button>
                     </div>
                 </form>
             </div>

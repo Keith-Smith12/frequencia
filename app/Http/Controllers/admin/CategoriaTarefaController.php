@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\CategoriaTarefa;
+use Exception;
 use Illuminate\Http\Request;
 
 class CategoriaTarefaController extends Controller
@@ -36,7 +37,6 @@ class CategoriaTarefaController extends Controller
                 'vc_descricao' => 'nullable|string',
                 'vc_prioridade' => 'required|string',
                 'it_tempo_estimado' => 'required|string',
-                'vc_tipo' => 'required|string'
             ]);
             CategoriaTarefa::create($categoria);
             return redirect()->route('CategoriaTarefa.index');
@@ -77,7 +77,6 @@ class CategoriaTarefaController extends Controller
                 'vc_descricao' => 'nullable|string',
                 'vc_prioridade' => 'required|string',
                 'it_tempo_estimado' => 'required|string',
-                'vc_tipo' => 'required|string'
             ]);
             $instancia = CategoriaTarefa::findOrFail($id);
             $instancia->update($categoria);

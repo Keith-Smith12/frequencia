@@ -10,7 +10,6 @@ class CategoriaTarefa extends Model
         'vc_nome',
         'vc_descricao',
         'vc_prioridade',
-        'vc_tipo',
         'it_tempo_estimado'
     ];
 }

@@ -22,8 +22,8 @@
         <a href="{{ route('justificativa_falta.create') }}" class="btn btn-primary">+ Adicionar</a>
     </div>
 
-    <div class="table-responsive text-nowrap">
-        <table class="table table-hover">
+    <div class="text-nowrap">
+        <table class="table table-hover table-responsive">
             <thead class="table-dark">
                 <tr>
                     <th>Tipo de Frequência</th>

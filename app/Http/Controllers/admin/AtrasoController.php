@@ -7,6 +7,7 @@ use App\Models\Atraso;
 use App\Models\TarefaUsuario; 
 use Illuminate\Http\Request;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class AtrasoController extends Controller
@@ -15,8 +16,8 @@ class AtrasoController extends Controller
      * Listar atrasos.
      */
     public function index()
-    {
-        $data['atrasos'] = Atraso::join('tarefa_usuarios', 'atrasos.it_id_tarefa_usuario', '=', 'tarefa_usuarios.id')
+    {   if (Auth::user()->vc_tipo == 'admin') {
+            $data['atrasos'] = Atraso::join('tarefa_usuarios', 'atrasos.it_id_tarefa_usuario', '=', 'tarefa_usuarios.id')
             ->join('users', 'tarefa_usuarios.it_id_usuario', '=', 'users.id')
             ->join('tarefas', 'tarefa_usuarios.it_id_tarefa', '=', 'tarefas.id')
             ->select(
@@ -25,17 +26,31 @@ class AtrasoController extends Controller
                 'tarefas.vc_nome as tarefa'     
             )
             ->get();
-            
+             return view('Site.Pages.atraso.show', $data );
 
-            return view('Site.Pages.atraso.show', $data );
-            
+           
+    } elseif (Auth::user()->vc_tipo == 'user'){
+            $data['atrasos'] = Atraso::join('tarefa_usuarios', 'atrasos.it_id_tarefa_usuario', '=', 'tarefa_usuarios.id')
+            ->join('users', 'tarefa_usuarios.it_id_usuario', '=', 'users.id')
+            ->join('tarefas', 'tarefa_usuarios.it_id_tarefa', '=', 'tarefas.id')
+            ->where('tarefa_usuarios.it_id_usuario',Auth::user()->id)
+            ->select(
+                'atrasos.*',
+                'users.vc_nome as usuario',     
+                'tarefas.vc_nome as tarefa'     
+            )
+            ->get();
+            return view('Site.Pages.atraso.late', $data );
+    } 
+       
     }
+    
 
     /**
      * Exibir formulário de criação.
      */
     public function create()
-    {
+        {
         $tarefasUsuarios = TarefaUsuario::all(); 
         return view('Site.Pages.atraso.create', compact('tarefasUsuarios'));
     }

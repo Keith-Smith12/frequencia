@@ -22,8 +22,8 @@
         <a href="{{ route('CategoriaTarefa.create') }}" class="btn btn-primary">+ Adicionar</a>
     </div>
 
-    <div class="table-responsive text-nowrap">
-        <table class="table">
+    <div class="text-nowrap">
+        <table class="table table-hover table-responsive">
             <thead class="table-dark">
                 <tr>
                     <th>ID</th>
@@ -67,7 +67,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="7" class="text-center">Nenhuma categoria encontrada</td>
+                    <td colspan="7" class="text-center">Nenhuma categoria cadastrada</td>
                 </tr>
                 @endforelse
             </tbody>

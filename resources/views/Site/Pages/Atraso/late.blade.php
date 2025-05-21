@@ -18,8 +18,8 @@
 
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
-        <h5 class="mb-0">Lista de Atrasos</h5>
-        <a href="{{ route('atraso.create') }}" class="btn btn-primary">+ Adicionar</a>
+        <h5 class="mb-0">Vezes em que Atrasei</h5>
+        <a href="{{route('justificativaAtraso.index')}}" class="btn btn-secondary">Justificar</a>
     </div>
     
     <div class="text-nowrap">
@@ -46,18 +46,6 @@
                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                                 <i class="bx bx-dots-vertical-rounded"></i>
                             </button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="{{ route('atraso.edit', $atraso->id) }}">
-                                    <i class="bx bx-edit-alt me-1"></i> Editar
-                                </a>
-                                <form action="{{ route('atraso.destroy', $atraso->id) }}" method="POST" class="d-inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="dropdown-item" onclick="return confirm('Tem certeza que deseja excluir?')">
-                                        <i class="bx bx-trash me-1"></i> Excluir
-                                    </button>
-                                </form>
-                            </div>
                         </div>
                     </td>
                 </tr>

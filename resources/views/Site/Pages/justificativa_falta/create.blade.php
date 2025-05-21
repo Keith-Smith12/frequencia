@@ -23,17 +23,17 @@
                     
                     <div class="mb-3">
                         <label class="form-label" for="it_id_frequencia">Frequência</label>
-                        <select class="form-select" id="it_id_frequencia" name="it_id_frequencia" required>
-                            <option value="">Selecione a frequência</option>
-                            @foreach ($frequencias as $frequencia)
-                                @if ($frequencia->vc_tipo == "Falta")
-                                <option value="{{ $frequencia->id }}"
-                                    {{ old('it_id_frequencia') == $frequencia->id ? 'selected' : '' }}>
-                                    {{ $frequencia->vc_tipo }} - {{ \Carbon\Carbon::parse($frequencia->dt_data)->format('d/m/Y') }} ({{ $frequencia->tm_hora_entrada }} às {{ $frequencia->tm_hora_saida }})
-                                </option>
-                                @endif
-                            @endforeach
-                        </select>
+                    <select class="form-select" id="it_id_frequencia" name="it_id_frequencia" required>
+                        <option value="">Selecione a frequência</option>
+                        @foreach ($frequencias as $frequencia)
+                            <option value="{{ $frequencia->id }}"
+                                {{ old('it_id_frequencia') == $frequencia->id ? 'selected' : '' }}>
+                                {{ $frequencia->vc_tipo }} - 
+                                {{ \Carbon\Carbon::parse($frequencia->dt_data)->format('d/m/Y') }} 
+                                ({{ $frequencia->tm_hora_entrada }} às {{ $frequencia->tm_hora_saida }})
+                            </option>
+                        @endforeach
+                    </select>
                     </div>
 
                     <div class="mb-3">
@@ -42,10 +42,9 @@
                             placeholder="Descreva o motivo da justificativa">{{ old('vc_descricao') }}</textarea>
                     </div>
 
-                    <div class="row justify-content-end mt-4">
-                        <div class="col-sm-10">
-                            <button type="submit" class="btn btn-primary">Registrar Justificativa</button>
-                        </div>
+                    <div class="d-flex justify-content-end gap-2">
+                        <a href="{{ route('justificativa_falta.index') }}" class="btn btn-outline-secondary">Cancelar</a>
+                        <button type="submit" class="btn btn-primary">Criar Justificativa</button>
                     </div>
                 </form>
             </div>

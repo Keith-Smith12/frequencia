@@ -29,10 +29,21 @@
                         <label class="col-sm-2 col-form-label" for="email">Email</label>
                         <div class="col-sm-10">
                             <input type="email" class="form-control" id="email" placeholder="exemplo@dominio.com" name="email" required/>
-                            <div class="form-text">Você pode usar letras, números e pontos</div>
                         </div>
                     </div>
                     
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label" for="vc_classe">Classe</label>
+                        <div class="col-sm-10">
+                        <select class="form-select" id="vc_classe" name="{{'vc_classe'}}" required>
+                            <option value="">Selecione uma classe</option>
+                            <option value="10ª">10ª</option>
+                            <option value="11ª">11ª</option>
+                            <option value="12ª" >12ª</option>
+                            <option value="finalista">13ª</option>
+                        </select>
+                        </div>
+                    </div>
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" for="password">Senha</label>
                         <div class="col-sm-10">
@@ -40,35 +51,11 @@
                         </div>
                     </div>
                     
-                    <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label" for="vc_classe">Classe</label>
-                        <div class="col-sm-10">
-                            <select class="form-select" id="vc_classe" name="vc_classe" required>
-                                <option value="">Selecione uma classe</option>
-                                <option value="admin">Administrador</option>
-                                <option value="user">Usuário</option>
-                                <!-- Adicione outras opções conforme necessário -->
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label" for="vc_tipo">Tipo</label>
-                        <div class="col-sm-10">
-                            <select class="form-select" id="vc_tipo" name="vc_tipo" required>
-                                <option value="">Selecione um tipo</option>
-                                <option value="admin">Administrador</option>
-                                <option value="normal">Normal</option>
-                                <!-- Adicione outras opções conforme necessário -->
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div class="row justify-content-end">
-                        <div class="col-sm-10">
+                    <div class="d-flex justify-content-between">
                             <button type="submit" class="btn btn-primary">Criar Usuário</button>
+                            <a href="{{route('user.all')}}" class="btn btn-secondary">Cancelar</a>
                         </div>
-                    </div>
+                    
                 </form>
             </div>
         </div>

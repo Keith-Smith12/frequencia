@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -25,8 +26,8 @@ class User extends Authenticatable
     protected $fillable = [
         'vc_nome',
         'email',
+        'vc_classe',
         'password',
-        'vc_tipo'
     ];
 
     
@@ -52,4 +53,5 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
 }

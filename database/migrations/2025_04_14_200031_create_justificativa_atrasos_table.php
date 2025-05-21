@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('justificativa_atrasos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('it_id_atraso');
+            $table->unsignedBigInteger('it_id_atraso');
             $table->foreign('it_id_atraso')->references('id')->on('atrasos')->cascadeOnDelete();
             $table->string('vc_descricao');
             $table->timestamps();

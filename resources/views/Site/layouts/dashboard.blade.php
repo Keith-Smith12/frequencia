@@ -2,14 +2,29 @@
 @extends('Site/layouts/page')
 @section('title')Dashboard @endsection
 @section('conteudo')
-
               <div class="row">
+                    @if($projectos != null)
+            @foreach($projectos as $projecto)
+              <div class="alert alert-info alert-dismissible fade show" role="alert">
+              <p>Muitos Parabéns 🎉✨ foi selecionado para supervisionar o Projecto:
+                <strong class="bold">{{ $projecto->vc_nome}}</strong>
+              </p> 
+               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            @endforeach
+          @endif
             @if(session('error'))
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                {{ session('error') }}
                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
               </div>
             @endif
+           @if(session('success'))
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+              {{ session('success') }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          @endif
                 <div class="col-lg-8 mb-4 order-0">
                   <div class="card">
                     <div class="d-flex align-items-end row">
@@ -70,9 +85,8 @@
                               </div>
                             </div>
                           </div>
-                          <span class="fw-semibold d-block mb-1">Profit</span>
-                          <h3 class="card-title mb-2">$12,628</h3>
-                          <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +72.80%</small>
+                          <span class="fw-semibold d-block mb-1">Frequencias</span>
+                          <h3 class="card-title mb-2">{{$FQs}}</h3>
                         </div>
                       </div>
                     </div>
@@ -104,9 +118,8 @@
                               </div>
                             </div>
                           </div>
-                          <span>Sales</span>
-                          <h3 class="card-title text-nowrap mb-1">$4,679</h3>
-                          <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.42%</small>
+                          <span>Atrasos</span>
+                          <h3 class="card-title text-nowrap mb-1">{{$atrasos}}</h3>
                         </div>
                       </div>
                     </div>
@@ -132,12 +145,12 @@
                                 aria-haspopup="true"
                                 aria-expanded="false"
                               >
-                                2022
+                                {{$date}}
                               </button>
                               <div class="dropdown-menu dropdown-menu-end" aria-labelledby="growthReportId">
-                                <a class="dropdown-item" href="javascript:void(0);">2021</a>
-                                <a class="dropdown-item" href="javascript:void(0);">2020</a>
-                                <a class="dropdown-item" href="javascript:void(0);">2019</a>
+                                <a class="dropdown-item" href="javascript:void(0);">2023</a>
+                                <a class="dropdown-item" href="javascript:void(0);">2024</a>
+                                <a class="dropdown-item" href="javascript:void(0);">{{$date}}</a>
                               </div>
                             </div>
                           </div>
@@ -196,9 +209,8 @@
                               </div>
                             </div>
                           </div>
-                          <span class="d-block mb-1">Total atrasos</span>
-                          <h3 class="card-title text-nowrap mb-2">$2,456</h3>
-                          <small class="text-danger fw-semibold"><i class="bx bx-down-arrow-alt"></i> -14.82%</small>
+                          <span class="d-block mb-1">Total Tarefas</span>
+                          <h3 class="card-title text-nowrap mb-2">{{$Tpcs}}</h3>
                         </div>
                       </div>
                     </div>
@@ -227,8 +239,7 @@
                             </div>
                           </div>
                           <span class="fw-semibold d-block mb-1">Total Users</span>
-                          <h3 class="card-title mb-2">$14,857</h3>
-                          <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.14%</small>
+                          <h3 class="card-title mb-2">{{$users}}</h3>
                         </div>
                       </div>
                       </div>  
@@ -238,14 +249,11 @@
                           <div class="d-flex justify-content-between flex-sm-row flex-column gap-3">
                             <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
                               <div class="card-title">
-                                <h5 class="text-nowrap mb-2">Profile Report</h5>
-                                <span class="badge bg-label-warning rounded-pill">Year 2021</span>
+                                <h5 class="text-nowrap mb-2">Tarefas por Fazer</h5>
+                                <span class="badge bg-label-warning rounded-pill">{{$date}}</span>
                               </div>
                               <div class="mt-sm-auto">
-                                <small class="text-success text-nowrap fw-semibold"
-                                  ><i class="bx bx-chevron-up"></i> 68.2%</small
-                                >
-                                <h3 class="mb-0">$84,686k</h3>
+                                <h3 class="mb-0">{{$Tpcpf}}</h3>
                               </div>
                             </div>
                             <div id="profileReportChart"></div>

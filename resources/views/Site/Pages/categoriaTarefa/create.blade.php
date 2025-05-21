@@ -34,11 +34,15 @@
                             placeholder="Descreva a categoria">{{ old('vc_descricao') }}</textarea>
                     </div>
 
-                    <div class="mb-3">
-                        <label class="form-label" for="vc_prioridade">Níveis de Prioridade</label>
-                        <textarea class="form-control" id="vc_prioridade" name="vc_prioridade" required
-                            placeholder="Ex: Alta, Média, Baixa">{{ old('vc_prioridade') }}</textarea>
-                    </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label" for="vc_prioridade">Prioridade</label>
+                            <select class="form-select" id="vc_prioridade" name="vc_prioridade" required>
+                                <option value="">Selecione a prioridade</option>
+                                <option value="Alta" {{ old('vc_prioridade') == 'Alta' ? 'selected' : '' }}>Alta</option>
+                                <option value="Média" {{ old('vc_prioridade') == 'Média' ? 'selected' : '' }}>Média</option>
+                                <option value="Baixa" {{ old('vc_prioridade') == 'Baixa' ? 'selected' : '' }}>Baixa</option>
+                            </select>
+                        </div>
 
                     <div class="mb-3">
                         <label class="form-label" for="it_tempo_estimado">Tempo Estimado (dias)</label>
@@ -47,17 +51,9 @@
                             value="{{ old('it_tempo_estimado') }}">
                     </div>
 
-                    <div class="mb-3">
-                        <label class="form-label" for="vc_tipo">Tipo de Categoria</label>
-                        <input type="text" class="form-control" id="vc_tipo" name="vc_tipo" required
-                            placeholder="Ex: Desenvolvimento, Design"
-                            value="{{ old('vc_tipo') }}">
-                    </div>
-
-                    <div class="row justify-content-end mt-4">
-                        <div class="col-sm-10">
-                            <button type="submit" class="btn btn-primary">Criar Categoria</button>
-                        </div>
+                    <div class="d-flex justify-content-end gap-2">
+                        <a href="{{ route('CategoriaTarefa.index') }}" class="btn btn-outline-secondary">Cancelar</a>
+                        <button type="submit" class="btn btn-primary">Criar Categoria</button>
                     </div>
                 </form>
             </div>

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Frequencia;
 use App\Models\JustificativaFalta; // Alterado para o modelo JustificativaFalta
 use Illuminate\Http\Request;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class JustificativaFaltaController extends Controller
@@ -14,17 +16,34 @@ class JustificativaFaltaController extends Controller
      * Listar justificativas de falta.
      */
     public function index()
-    {
-        $data['justificativas'] = JustificativaFalta::join('frequencias', 'justificativa_faltas.it_id_frequencia', '=', 'frequencias.id')
-            ->select(
+    {   
+        if (Auth::user()->vc_tipo == 'admin') {
+        $data['justificativas'] = JustificativaFalta::join('frequencias', 'justificativa_faltas.it_id_frequencia', '=', 'frequencias.id')       
+        ->select(
                 'justificativa_faltas.*',
                 'frequencias.vc_tipo as f_tipo' 
-            )
-            ->get();
-
-        $frequencias = \App\Models\Frequencia::all(); 
-
+            )->get();
+        $frequencias = Frequencia::all(); 
         return view('Site.Pages.justificativa_falta.show', $data, compact('frequencias'));
+
+    }elseif(Auth::user()->vc_tipo == 'user'){
+
+    $data['justificativas'] = JustificativaFalta::join(
+        'frequencias', 
+        'justificativa_faltas.it_id_frequencia', '=', 'frequencias.id'
+    )
+    ->where('frequencias.it_id_usuario', Auth::user()->id)
+    ->select(
+        'justificativa_faltas.*',
+        'frequencias.vc_tipo as f_tipo'
+    )
+    ->get();
+
+    $frequencias = Frequencia::where('vc_tipo', 'Falta')
+    ->where('it_id_usuario', Auth::user()->id)
+    ->get();
+        return view('Site.Pages.justificativa_falta.show', $data, compact('frequencias'));
+    }
     }
 
     /**
@@ -32,7 +51,9 @@ class JustificativaFaltaController extends Controller
      */
     public function create()
     {
-        $frequencias = \App\Models\Frequencia::all();  
+      $frequencias = Frequencia::where('vc_tipo', 'Falta')
+    ->where('it_id_usuario', Auth::user()->id)
+    ->get();
         return view('Site.Pages.justificativa_falta.create', compact('frequencias'));
     }
 
