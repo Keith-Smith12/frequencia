@@ -17,10 +17,7 @@ use App\Http\Controllers\admin\JustificativaAtrasoController;
 Route::get('/', function () {
     return view('Site.auth.login');
 })->name('login');
-Route::get('/register', function () {
-    return view('Site.auth.register');
-})->name('register');
-
+Route::get('/reg', [UserController::class, 'register'])->name('register');
 Route::get('/index', [UserController::class, 'index'])->name('user.index');
 
 Route::prefix('user')->group(function () {
