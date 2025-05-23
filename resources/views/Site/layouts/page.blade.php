@@ -1,6 +1,5 @@
 @include('Site/layouts/head')
 
-<body>
 <!-- Layout wrapper -->
 <div class="layout-wrapper layout-content-navbar">
   <div class="layout-container">
@@ -73,23 +72,22 @@
 
       <ul class="menu-inner py-1">
         <!-- Dashboard -->
-        <li class="menu-item active">
+        <li class="menu-item {{ Route::is('user.index') ? 'active' : '' }}">
           <a href="{{route('user.index')}}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+            <i class="menu-icon tf-icons bx bx-home-smile"></i>
             <div data-i18n="Analytics">Painel</div>
           </a>
         </li>
-        
         <!-- Utilizadores -->
         @if(Auth::user()->vc_tipo == 'admin')
-        <li class="menu-item">
+        <li class="menu-item {{ Route::is('user.all') ? 'active ' : '' }}">
           <a href="javascript:void(0);" class="menu-link menu-toggle">
             <i class="menu-icon tf-icons bx bx-user"></i>
             <div data-i18n="Layouts">Usuarios</div>
           </a>
           <ul class="menu-sub">
             <li class="menu-item">
-              <a href="{{route('user.index.2')}}" class="menu-link">
+              <a href="{{route('user.all')}}" class="menu-link">
                 <div data-i18n="Without menu">Todos Usuarios</div>
               </a>
             </li>
@@ -99,7 +97,7 @@
 
         
         <!-- Projectos -->
-        <li class="menu-item">
+        <li class="menu-item {{ Route::is('projecto.index') ? 'active' : '' }}">
           <a href="javascript:void(0);" class="menu-link menu-toggle">
             <i class="menu-icon tf-icons bx bx-folder"></i>
             <div data-i18n="Layouts">Projectos</div>
@@ -122,7 +120,7 @@
         </li>
         
         <!-- Tarefas -->
-        <li class="menu-item">
+        <li class="menu-item {{ Route::is('tarefa.index','CategoriaTarefa.index','tarefaUsuario.index') ? 'active ' : '' }}">
           <a href="javascript:void(0);" class="menu-link menu-toggle">
             <i class="menu-icon tf-icons bx bx-task"></i>
             <div data-i18n="Layouts">Tarefas</div>
@@ -156,7 +154,7 @@
         </li>
         
         <!-- Frequência -->
-        <li class="menu-item">
+        <li class="menu-item {{ Route::is('frequencia.index','justificativa_falta.index') ? 'active' : '' }}">
           <a href="javascript:void(0);" class="menu-link menu-toggle">
             <i class="menu-icon tf-icons bx bx-calendar-check"></i>
             <div data-i18n="Layouts">Frequência</div>
@@ -185,7 +183,7 @@
         </li>
         
         <!-- Atrasos -->
-        <li class="menu-item">
+        <li class="menu-item {{ Route::is('atraso.index','justificativaAtraso.index') ? 'active' : '' }}">
           <a href="javascript:void(0);" class="menu-link menu-toggle">
             <i class="menu-icon tf-icons bx bx-time"></i>
             <div data-i18n="Layouts">Atrasos</div>

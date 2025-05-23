@@ -24,12 +24,13 @@ Route::prefix('auth')->group(function () {
     Route::post('/login', ['as' => 'auth.login', 'uses' => "App\Http\Controllers\Auth\AuthController@login"]);
     Route::post('/register', ['as' => 'auth.register', 'uses' => "App\Http\Controllers\Auth\AuthController@register"]);
     Route::get('/logout', ['as' => 'auth.logout', 'uses' => "App\Http\Controllers\Auth\AuthController@logout"]);    
-});
+});    
+
+    Route::get('dashboard/', [UserController::class, 'index'])->name('user.index');
     Route::prefix('user')->group(function () {
-    Route::get('/', [UserController::class, 'index'])->name('user.index');
-    Route::get('/all', [UserController::class, 'all'])->name('user.index.2')->middleware('admin');
+    Route::get('/', [UserController::class, 'TODOS'])->name('user.all')->middleware('admin');
     Route::get('/create', [UserController::class, 'create'])->name('user.create')->middleware('admin');
-    Route::post('/store', [UserController::class, 'store'])->name('tarefa.store');
+    Route::post('/store', [UserController::class, 'store'])->name('user.store');
     Route::put('/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
     Route::post('/update/{id}', [UserController::class, 'update'])->name('tarefa.update');
     Route::delete('/delete/{id}', [UserController::class, 'delete'])->name('user.delete');

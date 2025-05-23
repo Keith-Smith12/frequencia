@@ -21,8 +21,8 @@
         <h5 class="mb-0">Lista de Frequências</h5>
         <a href="{{ route('frequencia.create') }}" class="btn btn-primary">+ Adicionar</a>
     </div>
-    <div class="table-hover text-nowrap">
-        <table class="table  table-responsive">
+    <div class="table-responsive text-nowrap">
+        <table class="table">
             <thead class="table-dark">
                 <tr>
                     <th>Data</th>

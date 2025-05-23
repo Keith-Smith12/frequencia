@@ -22,8 +22,8 @@
             + Adicionar Nova Tarefa
         </a>
     </div>
-    <div class="text-nowrap">
-        <table class="table table-hover table-responsive">
+    <div class="table-responsive text-nowrap">
+        <table class="table">
             <thead class="table-dark">
                 <tr>
                     <th>ID</th>

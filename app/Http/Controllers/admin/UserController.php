@@ -14,8 +14,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller {
-
-
+   
+    public function TODOS()
+    {
+        $users = User::all();
+        return view ('Site.Pages.user.show',compact('users'));
+        
+    }
 
     public function index()
     {
@@ -39,12 +44,7 @@ class UserController extends Controller {
         
     }
 
-    public function all()
-    {
-        $users = User::all();
-        return view ('Site.Pages.user.show',compact('users'));
-        
-    }
+
     
     public function create()
     {
@@ -62,7 +62,7 @@ class UserController extends Controller {
                 "password" => "required",
             ]);
             $user=User::create($request->all());
-            return redirect()->route('user.index.2')->with('success','usuário criado com sucesso!');
+            return redirect()->route('user.all')->with('success','usuário criado com sucesso!');
         }
         catch(Exception $e)
         {
@@ -80,7 +80,7 @@ class UserController extends Controller {
                 "password" => "required",
             ]);
             $user = $user->update($request->all());
-        return redirect()->route('user.index')->with('success','perfil atualizado com sucesso!');
+        return redirect()->route('user.all')->with('success','perfil atualizado com sucesso!');
         }catch(Exception $e){
             return redirect()->back()->with('error', 'Erro ao atualizar usuário: ' . $e->getMessage());
         }
@@ -99,7 +99,7 @@ class UserController extends Controller {
    public function delete($id){
     try{
         $user= User::findOrfail($id);
-        $user->delete($id);
+        $user->delete();
         return redirect()->route('user.all')->with('success','usuário deletado com sucesso!');
     }catch(Exception $e){
         return redirect()->back()->with('error','Erro ao editar usuário', $e->getMessage());

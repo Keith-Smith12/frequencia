@@ -14,7 +14,7 @@
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>Login Basic - Pages</title>
+    <title>Login</title>
 
     <meta name="description" content="" />
 
@@ -188,7 +188,7 @@
                 <div class="mb-3">
                   <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="remember-me" />
-                    <label class="form-check-label" for="remember-me"> Remember Me </label>
+                    <label class="form-check-label" for="remember-me"> Lembrar </label>
                   </div>
                 </div>
                 <div class="mb-3">
@@ -197,9 +197,9 @@
               </form>
 
               <p class="text-center">
-                <span>New on our platform?</span>
+                <span>Novo por aqui? esperimente:</span>
                 <a href="{{route('register')}}">
-                  <span>Create an account</span>
+                  <span>Criar uma conta</span>
                 </a>
               </p>
             </div>
