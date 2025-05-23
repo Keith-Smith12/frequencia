@@ -16,11 +16,10 @@ class AuthController extends Controller
 
     if ($user && Hash::check($credentials['password'], $user->password)) {
         Auth::login($user);
-            return redirect('/user');
+        return redirect()->route('user.index');
         } else {
             return back()->with('error', ' Credenciais Inválidas');
         }
-        return back()->with('error', ' Credenciais Inválidas');
     }
 
     public function register(Request $request){
