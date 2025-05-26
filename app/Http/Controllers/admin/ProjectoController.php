@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Projecto;
 use Illuminate\Http\Request;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class ProjectoController extends Controller
@@ -13,6 +14,7 @@ class ProjectoController extends Controller
 
     public function index()
     {
+         if (Auth::user()->vc_tipo == 'admin') {
         $data['projectos'] = Projecto::join('users', 'projectos.it_id_usuario', '=', 'users.id')
             ->select(
                 'projectos.*',
@@ -23,7 +25,18 @@ class ProjectoController extends Controller
         $usuarios = \App\Models\User::all(); 
 
         return view('Site.Pages.projecto.show', $data, compact('usuarios'));
+    }elseif (Auth::user()->vc_tipo == 'user') {
+                $data['projectos'] = Projecto::join('users', 'projectos.it_id_usuario', '=', 'users.id')
+                ->where('projectos.it_id_usuario',Auth::user()->id)
+            ->select(
+                'projectos.*',
+                'users.vc_nome as u_nome'
+            )
+            ->get();
+        $usuarios = \App\Models\User::find(Auth::user()->id);
+        return view('Site.Pages.projecto.mine', $data, compact('usuarios'));
     }
+}
 
     /**
      * Exibir formulário de criação.

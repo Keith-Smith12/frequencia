@@ -18,8 +18,8 @@
 
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
-        <h5 class="mb-0">Lista de Projetos</h5>
-        <a href="{{ route('projecto.create')}}" class="btn btn-primary">+ Novo Projeto</a>
+        <h5 class="mb-0">Lista de Projetos </h5>
+        <a href="{{ route('tarefaUsuario.index')}}" class="btn btn-primary">Tarefas do Projecto</a>
     </div>
 
     <div class="text-nowrap">
@@ -32,7 +32,6 @@
                     <th>Progresso</th>
                     <th>Prioridade</th>
                     <th>Responsável</th>
-                    <th>Ações</th>
                 </tr>
             </thead>
 
@@ -68,25 +67,6 @@
                         </span>
                     </td>
                     <td>{{ $projecto->u_nome }}</td>
-                    <td>
-                        <div class="dropdown">
-                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                <i class="bx bx-dots-vertical-rounded"></i>
-                            </button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="{{ route('projecto.edit', $projecto->id) }}">
-                                    <i class="bx bx-edit-alt me-1"></i> Editar
-                                </a>
-                                <form action="{{ route('projecto.destroy', $projecto->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="dropdown-item" onclick="return confirm('Tem certeza que deseja excluir?')">
-                                        <i class="bx bx-trash me-1"></i> Excluir
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                    </td>
                 </tr>
                 @empty
                 <tr>

@@ -15,13 +15,21 @@ class TarefaController extends Controller
     public function index()
     {
         // No TarefaController.php, modifique a consulta no método index():
-        $tarefas = Tarefa::withoutGlobalScopes()
+            try {
+         $tarefas = Tarefa::withoutGlobalScopes()
         ->join('projectos', 'tarefas.it_id_projecto', '=', 'projectos.id')
         ->join('categoria_tarefas', 'tarefas.it_id_cat_tarefa', '=', 'categoria_tarefas.id')
         ->select('tarefas.*', 'projectos.vc_nome as projeto_nome', 'categoria_tarefas.vc_nome as categoria_nome')
-        ->get();
-            
-        return view('Site.Pages.Tarefa.show', compact('tarefas'));
+        ->get(); 
+        return view('Site.Pages.Tarefa.show', compact('tarefas'));  
+            } catch (\Throwable $th) {
+         $tarefas = Tarefa::withoutGlobalScopes()
+        ->join('projectos', 'tarefas.it_id_projecto', '=', 'projectos.id')
+        ->join('categoria_tarefas', 'tarefas.it_id_cat_tarefa', '=', 'categoria_tarefas.id')
+        ->select('tarefas.*', 'projectos.vc_nome as projeto_nome', 'categoria_tarefas.vc_nome as categoria_nome')
+        ->get(); 
+            }     
+        
     }
 
     public function create()

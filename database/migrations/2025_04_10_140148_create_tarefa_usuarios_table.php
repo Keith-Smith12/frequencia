@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('tarefa_usuarios', function (Blueprint $table) {
             $table->id();
-            $table->integer('it_id_usuario');
-            $table->integer('it_id_tarefa');
+            $table->unsignedBigInteger('it_id_usuario');
+            $table->unsignedBigInteger('it_id_tarefa');
             $table->date('dt_data_atribuicao');
             $table->timestamps();
+            $table->foreign('it_id_usuario')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('it_id_tarefa')->references('id')->on('tarefas')->onDelete('cascade');
         });
     }
 

@@ -52,10 +52,9 @@
                                value="{{ old('dt_data_atribuicao', $tarefaUsuario->dt_data_atribuicao ?? '') }}">
                     </div>
                     
-                    <div class="row justify-content-end">
-                        <div class="col-sm-10">
-                            <button type="submit" class="btn btn-primary">Atribuir Tarefa</button>
-                        </div>
+                    <div class="d-flex justify-content-end gap-2">
+                        <a href="{{ route('tarefaUsuario.index') }}" class="btn btn-outline-secondary">Cancelar</a>
+                        <button type="submit" class="btn btn-primary">Atribuir Tarefa</button>
                     </div>
                 </form>
             </div>

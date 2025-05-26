@@ -22,8 +22,8 @@
         <a href="{{ route('justificativaAtraso.create') }}" class="btn btn-primary">+ Adicionar</a>
     </div>
 
-    <div class="table-responsive text-nowrap">
-        <table class="table">
+    <div class="text-nowrap">
+        <table class="table table-hover table-responsive">
             <thead class="table-dark">
                 <tr>
                     <th>Justificativa de Atraso</th>
@@ -34,7 +34,7 @@
             </thead>
 
             <tbody class="table-border-bottom-0">
-                @foreach ($justificativasAtraso as $justificativa)
+                @forelse ($justificativasAtraso as $justificativa)
                 <tr>
                     <td>{{ $justificativa->usuario }}</td>
                     <td>{{ $justificativa->tarefa }}</td>
@@ -59,7 +59,11 @@
                         </div>
                     </td>
                 </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <td colspan="7" class="text-center">Nenhum projeto encontrado</td>
+                    </tr>
+                @endforelse
             </tbody>
         </table>
     </div>

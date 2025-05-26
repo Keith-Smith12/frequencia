@@ -26,10 +26,11 @@
                         <select class="form-select" id="it_id_tarefa_usuario" name="it_id_tarefa_usuario" required>
                             <option value="">Selecione a tarefa e o usuário</option>
                             @foreach ($tarefasUsuarios as $tarefaUsuario)
-                            <option value="{{ $tarefaUsuario->id }}" 
-                                {{ old('it_id_tarefa_usuario', $atraso->it_id_tarefa_usuario ?? '') == $tarefaUsuario->id ? 'selected' : '' }}>
-                                {{ $tarefaUsuario->usuarios->vc_nome ?? 'Sem nome' }} - {{ $tarefaUsuario->tarefas->vc_nome ?? 'Sem título' }}
-                            </option>
+                                <option value="{{ $tarefaUsuario->id }}"
+                                    {{ (old('it_id_tarefa_usuario', $atraso->it_id_tarefa_usuario ?? '') == $tarefaUsuario->id) ? 'selected' : '' }}>
+                                    {{ $tarefaUsuario->usuarios->vc_nome ?? 'Usuário não identificado' }} - 
+                                    {{ $tarefaUsuario->tarefas->vc_nome ?? 'Tarefa sem nome' }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
@@ -41,10 +42,9 @@
                             value="{{ old('qtd_dias', $atraso->qtd_dias ?? '') }}">
                     </div>
 
-                    <div class="row justify-content-end mt-4">
-                        <div class="col-sm-10">
-                            <button type="submit" class="btn btn-primary">Criar</button>
-                        </div>
+                    <div class="d-flex justify-content-end gap-2">
+                        <a href="{{ route('atraso.index') }}" class="btn btn-outline-secondary">Cancelar</a>
+                        <button type="submit" class="btn btn-primary">Criar Categoria</button>
                     </div>
                 </form>
             </div>

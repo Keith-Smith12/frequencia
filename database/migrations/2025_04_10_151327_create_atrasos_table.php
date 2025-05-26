@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('atrasos', function (Blueprint $table) {
             $table->id();
-            $table->integer('it_id_tarefa_usuario');
+            $table->unsignedBigInteger('it_id_tarefa_usuario');
+            $table->foreign('it_id_tarefa_usuario')->references('id')->on('tarefa_usuarios')->cascadeOnDelete();
             $table->String('qtd_dias');
             $table->timestamps();
         });

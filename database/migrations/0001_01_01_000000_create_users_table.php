@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string('vc_nome');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
+            $table->string('vc_classe');
             $table->string('password');
-            $table->string('vc_classe')->nullable();
-            $table->string('vc_tipo')->nullable();
+            $table->string('vc_tipo')->default('user');
             $table->rememberToken();
             $table->timestamps();
         });

@@ -53,17 +53,40 @@
 
   <body>
     <!-- Content -->
-    @if(session('error'))
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        {{ session('error') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-@endif
+
+          @if(session('success'))
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+              {{ session('success') }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          @endif
+              @if(session('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ session('error') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <div
+                        class="bs-toast toast fade show bg-danger"
+                        role="alert"
+                        aria-live="assertive"
+                        aria-atomic="true"
+                      >
+                        <div class="toast-header">
+                          <i class="bx bx-bell me-2"></i>
+                          <div class="me-auto fw-semibold">Erro!!!!!!</div>
+                          <small>Alguma coisa errada</small>
+                          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                        </div>
+                        <div class="toast-body">
+                             {{ session('error') }}
+                        </div>
+                      </div>
+            @endif    
     <div class="container-xxl">
       <div class="authentication-wrapper authentication-basic container-p-y">
         <div class="authentication-inner">
           <!-- Register -->
-          <div class="card">
+          <div class="card">        
             <div class="card-body">
               <!-- Logo -->
               <div class="app-brand justify-content-center">
@@ -127,13 +150,13 @@
                 </a>
               </div>
               <!-- /Logo -->
-              <h4 class="mb-2">Welcome</h4>
-              <p class="mb-4">Please sign-in to your account and start the adventure</p>
+              <h4 class="mb-2">Bem-Vindo!</h4>
+              <p class="mb-4">Preencha os campos abaixo caso já tiver uma conta</p>
 
               <form id="formAuthentication" class="mb-3" action="{{route('auth.login')}}" method="POST">
                 @csrf
                 <div class="mb-3">
-                  <label for="email" class="form-label">Email or Username</label>
+                  <label for="email" class="form-label">Email</label>
                   <input
                     type="text"
                     class="form-control"
@@ -145,9 +168,9 @@
                 </div>
                 <div class="mb-3 form-password-toggle">
                   <div class="d-flex justify-content-between">
-                    <label class="form-label" for="password">Password</label>
+                    <label class="form-label" for="password">Palavra-Passe</label>
                     <a href="auth-forgot-password-basic.html">
-                      <small>Forgot Password?</small>
+                      <small>Esqueceu-se dá palavra-passe?</small>
                     </a>
                   </div>
                   <div class="input-group input-group-merge">

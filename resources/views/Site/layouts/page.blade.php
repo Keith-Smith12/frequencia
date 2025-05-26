@@ -63,7 +63,7 @@
               </g>
             </svg>
           </span>
-          <span class="app-brand-text demo menu-text fw-bolder ms-2">Sneat</span>
+          <span class="app-brand-text demo menu-text fw-bolder ms-2">SGF</span>
         </a>
 
         <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -81,6 +81,7 @@
         </li>
         
         <!-- Utilizadores -->
+        @if(Auth::user()->vc_tipo == 'admin')
         <li class="menu-item">
           <a href="javascript:void(0);" class="menu-link menu-toggle">
             <i class="menu-icon tf-icons bx bx-user"></i>
@@ -88,12 +89,14 @@
           </a>
           <ul class="menu-sub">
             <li class="menu-item">
-              <a href="{{route('user.all')}}" class="menu-link">
+              <a href="{{route('user.index.2')}}" class="menu-link">
                 <div data-i18n="Without menu">Todos Usuarios</div>
               </a>
             </li>
           </ul>
-        </li>
+        </li>            
+        @endif
+
         
         <!-- Projectos -->
         <li class="menu-item">
@@ -104,7 +107,15 @@
           <ul class="menu-sub">
             <li class="menu-item">
               <a href="{{route('projecto.index')}}" class="menu-link">
-                <div data-i18n="Without menu">Todos Projectos</div>
+                <div data-i18n="Without menu">
+                  @if(Auth::user()->vc_tipo == 'admin')
+                  Todos Projectos
+                  @endif
+                  @if(Auth::user()->vc_tipo == 'user')
+                  Meus Projectos
+                  @endif
+                  
+                </div>
               </a>
             </li>
           </ul>
@@ -117,19 +128,28 @@
             <div data-i18n="Layouts">Tarefas</div>
           </a>
           <ul class="menu-sub">
+            @if(Auth::user()->vc_tipo == 'admin')
+           <li class="menu-item">
+              <a href="{{route('CategoriaTarefa.index')}}" class="menu-link">
+                <div data-i18n="Without menu">Categorias de Tarefa</div>
+              </a>
+            </li>
             <li class="menu-item">
               <a href="{{route('tarefa.index')}}" class="menu-link">
                 <div data-i18n="Without menu">Todas Tarefas</div>
               </a>
             </li>
+            @endif
             <li class="menu-item">
               <a href="{{route('tarefaUsuario.index')}}" class="menu-link">
-                <div data-i18n="Without menu">Tarefas do Utilizador</div>
-              </a>
-            </li>
-            <li class="menu-item">
-              <a href="{{route('CategoriaTarefa.index')}}" class="menu-link">
-                <div data-i18n="Without menu">Categorias de Tarefa</div>
+                <div data-i18n="Without menu">
+                  @if(Auth::user()->vc_tipo == 'admin')
+                  Tarefas do Utilizador
+                  @endif
+                  @if(Auth::user()->vc_tipo == 'user')
+                  Minhas Tarefas
+                  @endif
+                </div>
               </a>
             </li>
           </ul>
@@ -142,11 +162,20 @@
             <div data-i18n="Layouts">Frequência</div>
           </a>
           <ul class="menu-sub">
+             
             <li class="menu-item">
               <a href="{{route('frequencia.index')}}" class="menu-link">
-                <div data-i18n="Without menu">Registos</div>
+                <div data-i18n="Without menu"
+                >@if(Auth::user()->vc_tipo == 'admin')
+                  Registos
+                  @endif
+                @if(Auth::user()->vc_tipo == 'user')
+                  Minhas Faltas
+                  @endif
+                </div>
               </a>
             </li>
+             
             <li class="menu-item">
               <a href="{{route('justificativa_falta.index')}}" class="menu-link">
                 <div data-i18n="Without menu">Justificações de Falta</div>
@@ -164,7 +193,14 @@
           <ul class="menu-sub">
             <li class="menu-item">
               <a href="{{route('atraso.index')}}" class="menu-link">
-                <div data-i18n="Without menu">Registos</div>
+                <div data-i18n="Without menu">
+                @if(Auth::user()->vc_tipo == 'admin')
+                  Registos
+                  @endif
+                @if(Auth::user()->vc_tipo == 'user')
+                  Meus Atrasos
+                  @endif  
+                </div>
               </a>
             </li>
             <li class="menu-item">
@@ -203,7 +239,6 @@
             </div>
           </div>
           <!-- /Search -->
-
           <ul class="navbar-nav flex-row align-items-center ms-auto">
             <!-- Place this tag where you want the button to render. -->
             <li class="nav-item lh-1 me-3">
@@ -239,10 +274,15 @@
                   <div class="dropdown-divider"></div>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="#">
+                  <form  action="{{route('user.edit',Auth::user()->id)}}" method="post">
+                    @csrf
+                    @method('PUT')
+                    <button class="dropdown-item">
                     <i class="bx bx-user me-2"></i>
-                    <span class="align-middle">My Profile</span>
-                  </a>
+                    <span class="align-middle">Meu Perfil</span>
+                  </button>
+                  </form>
+
                 </li>
                 <li>
                   <a class="dropdown-item" href="#">
@@ -273,7 +313,7 @@
             <!--/ User -->
           </ul>
         </div>
-      </nav>   
+      </nav>   @yield('alerts')  
       <div class="content-wrapper">
         <div class="container-xxl flex-grow-1 container-p-y">
           <div class="content-wrapper">

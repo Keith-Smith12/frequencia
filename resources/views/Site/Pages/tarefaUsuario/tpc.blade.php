@@ -18,9 +18,6 @@
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
         <h5 class="mb-0">Lista de Tarefas de Usuários</h5>
-        <a href="{{ route('tarefaUsuario.create') }}" class="btn btn-primary">
-            + Adicionar
-        </a>
     </div>
     <div class="text-nowrap">
         <table class="table table-hover table-responsive">
@@ -39,28 +36,16 @@
                     <td>{{ $tarefaUsuario->nome_usuario }}</td>
                     <td>{{ $tarefaUsuario->nome_tarefa }}</td>
                     <td>
-                        <div class="dropdown">
-                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                <i class="bx bx-dots-vertical-rounded"></i>
-                            </button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="{{ route('tarefaUsuario.edit', $tarefaUsuario->id) }}">
-                                    <i class="bx bx-edit-alt me-1"></i> Editar
-                                </a>
-                                <form action="{{ route('tarefaUsuario.destroy', $tarefaUsuario->id) }}" method="POST" class="d-inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="dropdown-item" onclick="return confirm('Tem certeza que deseja excluir?')">
-                                        <i class="bx bx-trash me-1"></i> Excluir
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
+                    <div class="mb-4 form-check">
+                        <input type="checkbox" class="form-check-input" id="ativo" name="ativo" value="1"
+                            {{ old('ativo', false) ? 'unchecked' : '' }}>
+                        <label class="form-check-label" for="ativo">Tarefa-feita</label>
+                    </div>
                     </td>
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="7" class="text-center">Nenhuma categoria encontrada</td>
+                    <td colspan="7" class="text-center">Nenhuma tarefa encontrada</td>
                 </tr>
                 @endforelse
             </tbody>

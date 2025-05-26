@@ -7,6 +7,7 @@ use App\Models\JustificativaAtraso;
 use App\Models\TarefaUsuario;
 use Illuminate\Http\Request;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class JustificativaAtrasoController extends Controller
@@ -15,8 +16,10 @@ class JustificativaAtrasoController extends Controller
      * Listar atrasos.
      */
     public function index()
-    {
-        $data['justificativasAtraso'] = JustificativaAtraso::join('atrasos', 'justificativa_atrasos.it_id_atraso', '=', 'atrasos.id')
+    {   
+        if (Auth::user()->vc_tipo == 'admin') {
+            
+             $data['justificativasAtraso'] = JustificativaAtraso::join('atrasos', 'justificativa_atrasos.it_id_atraso', '=', 'atrasos.id')
             ->join('tarefa_usuarios', 'atrasos.it_id_tarefa_usuario', '=', 'tarefa_usuarios.id')
             ->join('users', 'tarefa_usuarios.it_id_usuario', '=', 'users.id')
             ->join('tarefas', 'tarefa_usuarios.it_id_tarefa', '=', 'tarefas.id')
@@ -24,12 +27,27 @@ class JustificativaAtrasoController extends Controller
                 'justificativa_atrasos.*',
                 'users.vc_nome as usuario',     
                 'tarefas.vc_nome as tarefa'     
-            )
-            ->get();
-
-        $tarefasUsuarios = TarefaUsuario::all(); 
+            )->get();
+          
+            $tarefasUsuarios = TarefaUsuario::all();
             return view('Site.Pages.justificativaAtraso.show', $data, compact('tarefasUsuarios'));
-            
+
+        }elseif(Auth::user()->vc_tipo == 'user'){
+
+            $data['justificativasAtraso'] = JustificativaAtraso::join('atrasos', 'justificativa_atrasos.it_id_atraso', '=', 'atrasos.id')
+            ->join('tarefa_usuarios', 'atrasos.it_id_tarefa_usuario', '=', 'tarefa_usuarios.id')
+            ->join('users', 'tarefa_usuarios.it_id_usuario', '=', 'users.id')
+            ->join('tarefas', 'tarefa_usuarios.it_id_tarefa', '=', 'tarefas.id')
+            ->where('users.id', Auth::user()->id)
+            ->select(
+                'justificativa_atrasos.*',
+                'users.vc_nome as usuario',
+                'tarefas.vc_nome as tarefa'
+            )
+            ->get(); 
+            $tarefasUsuarios = TarefaUsuario::find(Auth::user()->id);
+             return view('Site.Pages.justificativaAtraso.show', $data, compact('tarefasUsuarios'));
+        }       
     }
 
     /**
@@ -37,7 +55,7 @@ class JustificativaAtrasoController extends Controller
      */
     public function create()
     {
-        $tarefasUsuarios = TarefaUsuario::all(); 
+        $tarefasUsuarios = TarefaUsuario::where('it_id_usuario', Auth::user()->id)->get();
         return view('Site.Pages.justificativaAtraso.create', compact('tarefasUsuarios'));
     }
 

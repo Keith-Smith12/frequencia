@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('vc_nome');
             $table->string('vc_descricao'); 
             $table->string('vc_prioridade'); 
-            $table->string('vc_tipo');  
             $table->Integer('it_tempo_estimado'); 
             $table->timestamps();
         });

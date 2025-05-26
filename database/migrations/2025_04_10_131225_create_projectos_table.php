@@ -18,8 +18,9 @@ return new class extends Migration
             $table->date('dt_data_conclusao');
             $table->integer('it_estado');
             $table->string('vc_prioridade');
-            $table->integer('it_id_usuario');
+            $table->unsignedBigInteger('it_id_usuario');
             $table->timestamps();
+            $table->foreign('it_id_usuario')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

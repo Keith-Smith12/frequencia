@@ -22,8 +22,8 @@
             + Adicionar
         </a>
     </div>
-    <div class="table-responsive text-nowrap">
-        <table class="table">
+    <div class="text-nowrap">
+        <table class="table table-hover table-responsive">
             <thead class="table-dark">
                 <tr>
                     <th>#</th>

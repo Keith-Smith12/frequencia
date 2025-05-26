@@ -18,6 +18,9 @@ return new class extends Migration
             $table->unsignedBigInteger('it_id_cat_tarefa');
             $table->date('dt_data_entrega'); 
             $table->timestamps();
+
+            $table->foreign('it_id_projecto')->references('id')->on('projectos')->cascadeOnDelete();
+            $table->foreign('it_id_cat_tarefa')->references('id')->on('categoria_tarefas')->cascadeOnDelete();
         });
     }
 

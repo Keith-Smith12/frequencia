@@ -37,4 +37,8 @@ class Tarefa extends Model
     {
         return $this->belongsTo(CategoriaTarefa::class, 'it_id_cat_tarefa');
     }
+    // Tarefa.php
+
+
 }
+
