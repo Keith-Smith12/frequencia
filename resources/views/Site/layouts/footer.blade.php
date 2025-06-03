@@ -15,6 +15,21 @@
             </footer>
     
 </div>
+    <script>
+    $(document).ready(function() {
+        $('#it_id_user').select2({
+            placeholder: "Selecione o(s) usuário(s)",
+            allowClear: true,
+            width: '100%'
+        });
+    });
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="{{ asset('assets/vendor/libs/select2/select2.min.js') }}"></script>
+    <script src="{{'assets/vendor/js/helpers.js'}}"></script>
+    <script src="{{'assets/js/config.js'}}"></script>
     <script src="{{'assets/vendor/js/menu.js'}}"></script>
     <script src="{{ asset('vendor/sneat/assets/vendor/js/helpers.js') }}"></script>
     <script src="{{ asset('vendor/sneat/assets/js/config.js') }}"></script>

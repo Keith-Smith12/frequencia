@@ -26,7 +26,7 @@
         <table class="table">
             <thead class="table-dark">
                 <tr>
-                    <th>ID</th>
+                    <th>#</th>
                     <th>Nome</th>
                     <th>Categoria de Tarefa</th>
                     <th>Projecto</th>

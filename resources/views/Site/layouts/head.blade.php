@@ -28,7 +28,6 @@
       href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
       rel="stylesheet"
     />
-
     <link rel="stylesheet" href="{{asset('assets/vendor/fonts/boxicons.css')}}" />
 
     <link rel="stylesheet" href="{{asset('assets/vendor/css/core.css')}}" class="template-customizer-core-css" />
@@ -38,9 +37,11 @@
     <link rel="stylesheet" href="{{asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css')}}" />
 
     <link rel="stylesheet" href="{{asset('assets/vendor/libs/apex-charts/apex-charts.css')}}" />
-    <script src="{{'assets/vendor/js/helpers.js'}}"></script>
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/select2/select2.min.css') }}">
 
-    <script src="{{'assets/js/config.js'}}"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+
   </head>
   <body>
   @yield('body')

@@ -17,8 +17,8 @@
 
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
-        <h5 class="mb-0">Lista de Tarefas de Usuários</h5>
-        <a href="{{ route('tarefaUsuario.create') }}" class="btn btn-primary">
+        <h5 class="mb-0">Lista de projecto de Usuários</h5>
+        <a href="{{ route('projectoUsuario.create') }}" class="btn btn-primary">
             + Adicionar
         </a>
     </div>
@@ -27,33 +27,28 @@
             <thead class="table-dark">
                 <tr>
                     <th>#</th>
-                    <th>Data de Atribuição</th>
                     <th>Usuário</th>
-                    <th>Tarefa</th>
+                    <th>projecto</th>
                     <th>Ações</th>
                 </tr>
             </thead>
             <tbody class="table-border-bottom-0">
-                @forelse ($tarefaUsuarios as $tarefaUsuario)
+                @forelse ($projectoUsuarios as $projectoUsuario)
                 <tr>
-                    <td>{{ $tarefaUsuario->id }}</td>
-                    <td>{{ $tarefaUsuario->dt_data_atribuicao }}</td>
-                    <td>{{ $tarefaUsuario->nome_usuario }}</td>
-                    <td>{{ $tarefaUsuario->nome_tarefa }}</td>
+                    <td>{{ $projectoUsuario->id }}</td>
+                    <td>{{ $projectoUsuarioUsuario->nome_usuario }}</td>
+                    <td>{{ $projectoUsuariorUsuario->nome_tarefa }}</td>
                     <td>
                         <div class="dropdown">
                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                                 <i class="bx bx-dots-vertical-rounded"></i>
                             </button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="{{ route('tarefaUsuario.edit', $tarefaUsuario->id) }}">
-                                    <i class="bx bx-edit-alt me-1"></i> Editar
-                                </a>
-                                <form action="{{ route('tarefaUsuario.destroy', $tarefaUsuario->id) }}" method="POST" class="d-inline">
+                                <form action="{{ route('projectoUsuario.destroy', $projectoUsuario->id) }}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="dropdown-item" onclick="return confirm('Tem certeza que deseja excluir?')">
-                                        <i class="bx bx-trash me-1"></i> Excluir
+                                    <button type="submit" class="dropdown-item" onclick="return confirm('Tem certeza que deseja sair?')">
+                                        <i class="bx bx-trash me-1"></i>sair
                                     </button>
                                 </form>
                             </div>
@@ -62,7 +57,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="7" class="text-center">Nenhuma categoria encontrada</td>
+                    <td colspan="7" class="text-center">Nenhum usuário selecionado para projecto</td>
                 </tr>
                 @endforelse
             </tbody>

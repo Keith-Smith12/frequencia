@@ -26,6 +26,7 @@
         <table class="table">
             <thead class="table-dark">
                 <tr>
+                    <th>#</th>
                     <th>Nome</th>
                     <th>Início</th>
                     <th>Conclusão</th>
@@ -39,6 +40,7 @@
             <tbody class="table-border-bottom-0">
                 @forelse ($projectos as $projecto)
                 <tr>
+                    <td>{{ $projecto->id }}</td>
                     <td>{{ $projecto->vc_nome }}</td>
                     <td>{{ \Carbon\Carbon::parse($projecto->dt_data_inicio)->format('d/m/Y') }}</td>
                     <td>{{ \Carbon\Carbon::parse($projecto->dt_data_conclusao)->format('d/m/Y') }}</td>

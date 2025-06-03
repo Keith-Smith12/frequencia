@@ -116,6 +116,11 @@
                 </div>
               </a>
             </li>
+            <li class="menu-item">
+              <a href="{{route('projectoUsuario.index')}}" class="menu-link">
+                <div data-i18n="Without menu">Projectos Usuário</div>
+              </a>
+            </li>
           </ul>
         </li>
         

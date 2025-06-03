@@ -8,6 +8,7 @@ use App\Http\Controllers\admin\FrequenciaController;
 use App\Http\Controllers\admin\JustificativaAtrasoController;
 use App\Http\Controllers\admin\JustificativaFaltaController;
 use App\Http\Controllers\admin\ProjectoController;
+use App\Http\Controllers\admin\ProjectoUsuarioController;
 use App\Http\Controllers\admin\TarefaController;
 use App\Http\Controllers\admin\TarefaUsuarioController;
 use App\Http\Controllers\admin\UserController;
@@ -52,6 +53,15 @@ Route::middleware('user')->group(function () {
     Route::get('/{id}/edit', [JustificativaAtrasoController::class, 'edit'])->name('justificativaAtraso.edit');
     Route::put('/{id}', [JustificativaAtrasoController::class, 'update'])->name('justificativaAtraso.update');
     Route::delete('/{id}', [JustificativaAtrasoController::class, 'destroy'])->name('justificativaAtraso.destroy');
+});
+
+Route::prefix('projectoUsuario')->group(function () {
+    Route::get('/', [ProjectoUsuarioController::class, 'index'])->name('projectoUsuario.index');
+    Route::get('/create', [ProjectoUsuarioController::class, 'create'])->name('projectoUsuario.create');
+    Route::post('/', [ProjectoUsuarioController::class, 'store'])->name('projectoUsuario.store')->middleware('admin');
+    Route::get('/{id}/edit', [ProjectoUsuarioController::class, 'edit'])->name('projectoUsuario.edit')->middleware('admin');
+    Route::put('/{id}', [ProjectoUsuarioController::class, 'update'])->name('projectoUsuario.update')->middleware('admin');
+    Route::delete('/{id}', [ProjectoUsuarioController::class, 'destroy'])->name('projectoUsuario.destroy');
 });
     /*-----------------Rotas especiais-------------------*/ 
     Route::get('frequencia/', [FrequenciaController::class, 'index'])->name('frequencia.index');

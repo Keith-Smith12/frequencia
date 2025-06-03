@@ -86,7 +86,7 @@
 </div>
 
                 
-                <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-between mt-2">
                     <button type="submit" class="btn btn-primary me-2">Atualizar</button>
                     <a href="{{ route('user.all') }}" class="btn btn-light">Cancelar</a>
                 </div>

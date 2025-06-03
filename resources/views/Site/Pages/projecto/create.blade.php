@@ -75,7 +75,7 @@
                         </select>
                     </div>
 
-                    <div class="d-flex justify-content-end gap-2">
+                    <div class="d-flex justify-content-end gap-2 mt-2">
                         <a href="{{ route('projecto.index') }}" class="btn btn-outline-secondary">Cancelar</a>
                         <button type="submit" class="btn btn-primary">Cadastrar Projecto</button>
                     </div>
